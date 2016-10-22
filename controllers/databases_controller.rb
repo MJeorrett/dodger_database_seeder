@@ -15,7 +15,7 @@ get '/databases' do
     }
   end
 
-  @table_html = HtmlTable.generate_table( names_data )
+  @table_html = HtmlTable.generate_table( names_data, ["DB Name"] )
   erb(:'databases/index')
 end
 
