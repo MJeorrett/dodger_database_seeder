@@ -26,6 +26,7 @@ class HtmlElementTest < MiniTest::Test
     }
     @option_element = HtmlElement.new( 'option', "Option 1", option_attributes )
 
+    # NESTED ELEMENTS
     @nested_element = HtmlElement.new( 'div', @a_element )
 
     nested_elements_arr = [ @h1_element, @a_element, @div_element ]
@@ -71,6 +72,11 @@ class HtmlElementTest < MiniTest::Test
   <div></div>
 </div>"
     assert_equal( expected, @array_nested_element.to_s )
+  end
+
+  def test_get_lines_single_element()
+    expected = ["<<a id='this_link' class='important' href='www.html.com'>Click me!</a>"]
+    assert_equal( expected, @a_element.get_lines )
   end
 
 end
