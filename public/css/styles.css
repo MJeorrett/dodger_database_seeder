@@ -31,6 +31,22 @@ a {
   cursor: pointer;
 }
 
+.breadcrumb {
+  display: inline-block;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.breadcrumb-current {
+  font-weight: bold;
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
+#container {
+  padding: 30px;
+}
+
 
 /* TABLES */
 table, thead, th, tr, td {
@@ -47,7 +63,6 @@ table {
   border-collapse: collapse;
   border-width: 3px;
   cursor: cell;
-  margin: 10px;
 }
 
 thead {
@@ -60,7 +75,7 @@ tr:hover {
 }
 
 th {
-  font-size: 1.4em;
+  font-size: 18px;
 }
 
 th:hover {
