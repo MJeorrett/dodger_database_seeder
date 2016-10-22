@@ -2,10 +2,13 @@ require_relative('../db/sql_runner')
 
 class Database
 
-  attr_reader :name
-
-  def initialize( name )
-    @name = name
+  def self.tables_for_database( db_name )
+    sql =
+    "SELECT table_name FROM information_schema.tables
+      WHERE table_type = 'BASE TABLE' AND
+        table_schema NOT IN ('pg_catalog', 'information_schema')"
+    results = SqlRunner.run( db_name, sql, true )
+    return results
   end
 
   def self.all_names()
