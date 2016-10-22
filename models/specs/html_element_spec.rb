@@ -26,6 +26,7 @@ class HtmlElementTest < MiniTest::Test
   end
 
   def test_empty_element_and_no_attributes()
+
     assert_equal( "<br></br>", @br_element.to_s )
   end
 
