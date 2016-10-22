@@ -1,9 +1,20 @@
 require_relative('../models/database')
+require_relative('../models/html_element')
 require_relative('../models/html_table')
 
 # INDEX
 get '/databases' do
   names_data = Database.all_names()
+
+  names_data.map! do |name_data|
+    key = name_data.keys.first
+    db_name = name_data[key]
+    href = "/databases/#{db_name}"
+    {
+      key => HtmlElement.new( 'a', db_name, { href: href } )
+    }
+  end
+
   @table_html = HtmlTable.generate_table( names_data )
   erb(:'databases/index')
 end
@@ -22,7 +33,13 @@ end
 get '/databases/:dbname' do
   @db_name = params[:dbname]
   tables_data = Database.tables_for_database( @db_name )
-  @tables_html = HtmlTable.generate_table( tables_data )
+
+  if tables_data.empty?
+    @tables_html = "<h3>No data</h3>"
+  else
+    @tables_html = HtmlTable.generate_table( tables_data )
+  end
+
   erb(:'databases/show')
 end
 
