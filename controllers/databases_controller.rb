@@ -20,7 +20,10 @@ end
 
 # SHOW
 get '/databases/:dbname' do
-  "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+  @db_name = params[:dbname]
+  tables_data = Database.tables_for_database( @db_name )
+  @tables_html = HtmlTable.generate_table( tables_data )
+  erb(:'databases/show')
 end
 
 # EDIT
