@@ -37,7 +37,14 @@ get '/databases/:dbname' do
   if tables_data.empty?
     @tables_html = "<h3><i>-- No data --</i></h3>"
   else
-    @tables_html = HtmlTable.generate_table( tables_data )
+
+    tables_data.map do |table_data|
+      href = "/databases/#{@db_name}/#{table_data['table_name']}/seeds"
+      seeds_link = HtmlElement.new( 'a', 'seeds', { href: href })
+      table_data['seeds_link'] = seeds_link
+    end
+
+    @tables_html = HtmlTable.generate_table( tables_data, [ "Table Name", "" ] )
   end
 
   erb(:'databases/show')
