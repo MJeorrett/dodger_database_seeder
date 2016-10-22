@@ -7,6 +7,7 @@ class HtmlElementTest < MiniTest::Test
 
   def setup()
 
+    @br_element = HtmlElement.new('br')
     @h1_element = HtmlElement.new('h1', "This is a title")
 
     a_attributes = {
@@ -21,7 +22,11 @@ class HtmlElementTest < MiniTest::Test
       selected: :boolean
     }
 
-    @option_element = HtmlElement.new( 'option', "Option 1", option_attributes)
+    @option_element = HtmlElement.new( 'option', "Option 1", option_attributes )
+  end
+
+  def test_empty_element_and_no_attributes()
+    assert_equal( "<br></br>", @br_element.to_s )
   end
 
   def test_no_attributes()
