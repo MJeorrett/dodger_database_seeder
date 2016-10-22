@@ -15,4 +15,10 @@ class Seed
     @settings = SqlRunner.run( 'dodas', seed_settings_sql, true )
   end
 
+  def save()
+    sql = "INSERT INTO seeds(name, db_name, table_name) VALUES ('#{@name}', '#{@db_name}', '#{@table_name}') RETURNING ID"
+    result = SqlRunner.run ( 'dodas', sql )
+    @id = result.first['id'].to_i
+  end
+
 end
