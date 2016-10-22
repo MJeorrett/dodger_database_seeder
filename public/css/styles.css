@@ -1,0 +1,54 @@
+body {
+  color: dodgerblue;
+  font-family: monospace;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 3em;
+  padding: 10px;
+}
+
+
+/* TABLES */
+table, thead, th, tr, td {
+  border-color: dodgerblue;
+  border-style: solid;
+}
+
+td, th {
+  border-width: 1.5px;
+  padding: 5px 7px;
+}
+
+table {
+  border-collapse: collapse;
+  border-width: 3px;
+  cursor: cell;
+  margin: 10px;
+}
+
+thead {
+  background-color: dodgerblue;
+  color: white;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: lightblue;
+}
+
+th {
+  font-size: 1.4em;
+}
+
+th:hover {
+  background-color: dodgerblue;
+}
+
+td {
+  font-family: 'Cutive Mono', monospace;
+}
