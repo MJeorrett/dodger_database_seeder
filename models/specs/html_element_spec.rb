@@ -7,7 +7,7 @@ class HtmlElementTest < MiniTest::Test
 
   def setup()
 
-    @br_element = HtmlElement.new('br')
+    @div_element = HtmlElement.new( 'div' )
     @h1_element = HtmlElement.new('h1', "This is a title")
 
     a_attributes = {
@@ -27,7 +27,7 @@ class HtmlElementTest < MiniTest::Test
 
   def test_empty_element_and_no_attributes()
 
-    assert_equal( "<br></br>", @br_element.to_s )
+    assert_equal( "<div></div>", @div_element.to_s )
   end
 
   def test_no_attributes()
@@ -46,6 +46,10 @@ class HtmlElementTest < MiniTest::Test
 
     expected = "<option id='option_1' selected>Option 1</option>"
     assert_equal( expected, @option_element.to_s )
+  end
+
+  def test_single_nested_element()
+
   end
 
 end
