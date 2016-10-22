@@ -2,6 +2,8 @@ require('pry-byebug')
 
 class HtmlElement
 
+  attr_reader :tag
+
   def initialize( tag, contents="", attributes=[] )
     @tag = tag
 
