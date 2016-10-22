@@ -92,4 +92,22 @@ class HtmlElementTest < MiniTest::Test
     assert_equal( expected, @nested_element.get_lines )
   end
 
+  def test_two_deep_nesting()
+    expected =
+"<body class='sick-nesting'>
+  <div id='i-am-nested'>
+    <h1>This is a title</h1>
+    <a id='this_link' class='important' href='www.html.com'>Click me!</a>
+    <div></div>
+  </div>
+  <div>
+    <a id='this_link' class='important' href='www.html.com'>Click me!</a>
+  </div>
+</body>"
+    contents = [ @array_nested_element, @nested_element ]
+    attributes = { class: 'sick-nesting'}
+    two_deep_nested_element = HtmlElement.new( 'body', contents, attributes )
+    assert_equal( expected, two_deep_nested_element.to_s )
+  end
+
 end
