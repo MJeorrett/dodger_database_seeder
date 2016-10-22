@@ -1,6 +1,8 @@
 require('minitest/autorun')
 require('minitest/rg')
 
+require_relative('../html_table')
+
 class HtmlTableTest < MiniTest::Test
 
   def test_two_by_two()
