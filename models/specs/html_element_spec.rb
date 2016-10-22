@@ -25,6 +25,9 @@ class HtmlElementTest < MiniTest::Test
     @option_element = HtmlElement.new( 'option', "Option 1", option_attributes )
 
     @nested_element = HtmlElement.new( 'div', @a_element )
+
+    nested_elements = [ @h1_element, @a_element, @div_element ]
+    @array_nested_element = HtmlElement.new( 'div', nested_elements, { id: "i-am-nested" })
   end
 
   def test_empty_element_and_no_attributes()
@@ -56,6 +59,16 @@ class HtmlElementTest < MiniTest::Test
   <a id='this_link' class='important' href='www.html.com'>Click me!</a>
 </div>"
     assert_equal( expected, @nested_element.to_s )
+  end
+
+  def test_array_of_nested_elements()
+    expected =
+"<div id='i-am-nested'>
+  <h1>This is a title</h1>
+  <a id='this_link' class='important' href='www.html.com'>Click me!</a>
+  <div></div>
+</div>"
+    assert_equal( expected, @array_nested_element.to_s )
   end
 
 end
