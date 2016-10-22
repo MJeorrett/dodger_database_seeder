@@ -1,3 +1,6 @@
+require_relative('./seed')
+require_relative('../db/sql_interface')
+
 class SeedSetting
 
   attr_reader :id, :seed_id, :column_name, :source_file
@@ -11,9 +14,13 @@ class SeedSetting
   end
 
   def save()
-    sql = "INSERT INTO seed_settings(seed_id, column_name, source_file) VALUES (#{@seed_id}, '#{@column_name}', '#{@source_file}') RETURNING ID"
-    result = SqlRunner.run ( 'dodas', sql )
-    @id = result.first['id'].to_i
+    data = {
+      seed_id: @seed_id,
+      column_name: @column_name,
+      source_file: @source_file
+    }
+    id = SqlInterface.insert( Seed::DB_NAME, 'seed_settings', data )
+    @id = id
   end
 
 end

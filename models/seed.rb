@@ -1,6 +1,8 @@
-require_relative('../db/sql_runner')
+require_relative('../db/sql_interface')
 
 class Seed
+
+  DB_NAME = 'dodas'
 
   attr_reader :id, :name, :db_name, :table_name, :settings
 
@@ -16,9 +18,13 @@ class Seed
   end
 
   def save()
-    sql = "INSERT INTO seeds(name, db_name, table_name) VALUES ('#{@name}', '#{@db_name}', '#{@table_name}') RETURNING ID"
-    result = SqlRunner.run ( 'dodas', sql )
-    @id = result.first['id'].to_i
+    data = {
+      name: @name,
+      db_name: @db_name,
+      table_name: @table_name
+    }
+    id = SqlInterface.insert( DB_NAME, 'seeds', data )
+    @id = id
   end
 
 end
