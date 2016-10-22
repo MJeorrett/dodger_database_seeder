@@ -35,9 +35,10 @@ class HtmlElement
       @contents.each do |element|
         html += "  #{element}\n"
       end
-      
+
     else
       raise( TypeError, "type #{@contents.class} not supported")
+      
     end
 
     html += "</#{@tag}>"
