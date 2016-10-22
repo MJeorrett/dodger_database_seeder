@@ -9,6 +9,7 @@ CREATE TABLE seeds (
 );
 
 CREATE TABLE seed_settings (
+  id SERIAL4 primary key,
   seed_id INT4 REFERENCES seeds(id),
   column_name VARCHAR(100),
   source_file VARCHAR(255)
