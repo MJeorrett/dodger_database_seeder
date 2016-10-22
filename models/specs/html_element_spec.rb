@@ -3,6 +3,8 @@ require('minitest/rg')
 
 require_relative('../html_element')
 
+require('pry-byebug')
+
 class HtmlElementTest < MiniTest::Test
 
   def setup()
@@ -30,6 +32,7 @@ class HtmlElementTest < MiniTest::Test
     @nested_element = HtmlElement.new( 'div', @a_element )
 
     nested_elements_arr = [ @h1_element, @a_element, @div_element ]
+
     @array_nested_element = HtmlElement.new( 'div', nested_elements_arr, { id: "i-am-nested" })
   end
 
@@ -77,6 +80,16 @@ class HtmlElementTest < MiniTest::Test
   def test_get_lines_single_element()
     expected = ["<a id='this_link' class='important' href='www.html.com'>Click me!</a>"]
     assert_equal( expected, @a_element.get_lines )
+  end
+
+  def test_get_lines_single_nested_element()
+    expected = [
+      "<div>",
+      "  <a id='this_link' class='important' href='www.html.com'>Click me!</a>",
+      "</div>"
+    ]
+
+    assert_equal( expected, @nested_element.get_lines )
   end
 
 end
