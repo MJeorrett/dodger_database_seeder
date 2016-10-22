@@ -38,12 +38,17 @@ class HtmlElement
 
     else
       raise( TypeError, "type #{@contents.class} not supported")
-      
+
     end
 
     html += "</#{@tag}>"
 
     return html
+  end
+
+  def get_lines()
+
+    return [self.to_s()]
   end
 
 end

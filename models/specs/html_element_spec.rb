@@ -75,7 +75,7 @@ class HtmlElementTest < MiniTest::Test
   end
 
   def test_get_lines_single_element()
-    expected = ["<<a id='this_link' class='important' href='www.html.com'>Click me!</a>"]
+    expected = ["<a id='this_link' class='important' href='www.html.com'>Click me!</a>"]
     assert_equal( expected, @a_element.get_lines )
   end
 
