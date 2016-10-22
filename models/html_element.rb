@@ -1,9 +1,9 @@
 class HtmlElement
 
-  def initialize( tag, attributes, contents )
+  def initialize( tag, contents, attributes )
     @tag = tag
-    @attributes = attributes
     @contents = contents
+    @attributes = attributes
   end
 
   def to_s()
