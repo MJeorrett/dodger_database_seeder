@@ -7,9 +7,11 @@ class HtmlElementTest < MiniTest::Test
 
   def setup()
 
+    # BASIC ELEMENTS
     @div_element = HtmlElement.new( 'div' )
     @h1_element = HtmlElement.new('h1', "This is a title")
 
+    # <a> ELEMENT
     a_attributes = {
       id: 'this_link',
       class: 'important',
@@ -17,17 +19,17 @@ class HtmlElementTest < MiniTest::Test
     }
     @a_element = HtmlElement.new('a', "Click me!", a_attributes )
 
+    # <option> ELEMENT
     option_attributes = {
       id: 'option_1',
       selected: :boolean
     }
-
     @option_element = HtmlElement.new( 'option', "Option 1", option_attributes )
 
     @nested_element = HtmlElement.new( 'div', @a_element )
 
-    nested_elements = [ @h1_element, @a_element, @div_element ]
-    @array_nested_element = HtmlElement.new( 'div', nested_elements, { id: "i-am-nested" })
+    nested_elements_arr = [ @h1_element, @a_element, @div_element ]
+    @array_nested_element = HtmlElement.new( 'div', nested_elements_arr, { id: "i-am-nested" })
   end
 
   def test_empty_element_and_no_attributes()
