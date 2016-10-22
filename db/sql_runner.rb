@@ -2,7 +2,7 @@ require('pg')
 
 class SqlRunner
 
-  def self.run( sql )
+  def self.run( sql, strip_results=false )
 
     begin
       db = PG.connect({ dbname: 'pizza_shop', host: 'localhost' })
@@ -16,8 +16,12 @@ class SqlRunner
 
     end
 
-    return result
-    
+    if strip_results
+      return result.map { |a_result| a_result }
+    else
+      return result
+    end
+
   end
 
 end
