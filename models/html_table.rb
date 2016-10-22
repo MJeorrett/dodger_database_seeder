@@ -2,9 +2,13 @@ require_relative('./html_element')
 
 class HtmlTable
 
-  def self.generate_table( data )
+  def self.generate_table( data, column_names=nil )
 
-    th_elements = data.first.keys.map do |column|
+    if column_names.nil?
+      column_names = data.first.keys
+    end
+
+    th_elements = column_names.map do |column|
       HtmlElement.new( 'th', column )
     end
 
