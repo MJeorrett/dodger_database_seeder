@@ -17,7 +17,7 @@ post '/databases/:dbname/:table_name/seeds' do
 end
 
 # SHOW
-get '/databases/:dbname/seeds/:id' do
+get '/databases/:dbname/:table_name/seeds/:id' do
   "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname/:table_name/seeds/:id' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
 end
 
