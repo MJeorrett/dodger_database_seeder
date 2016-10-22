@@ -1,4 +1,4 @@
-class HtmlTag
+class HtmlElement
 
   def initialize( tag, attributes, contents )
     @tag = tag
@@ -15,7 +15,7 @@ class HtmlTag
       else
         html += " #{attribute}='#{value}'"
       end
-      
+
     end
     html += ">#{@contents}</#{@tag}>"
 
