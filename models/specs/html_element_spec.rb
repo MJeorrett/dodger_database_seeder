@@ -20,13 +20,14 @@ class HtmlElementTest < MiniTest::Test
       id: 'option_1',
       selected: :boolean
     }
+
     @option_element = HtmlElement.new( 'option', "Option 1", option_attributes)
   end
 
   def test_no_attributes()
 
     expected = "<h1>This is a title</h1>"
-    assert_equal( expected, @h1_element )
+    assert_equal( expected, @h1_element.to_s )
   end
 
   def test_simple_attributes_string_contents()
@@ -38,7 +39,7 @@ class HtmlElementTest < MiniTest::Test
   def test_boolean_attribute()
 
     expected = "<option id='option_1' selected>Option 1</option>"
-    assert_equal( expected, option_element.to_s )
+    assert_equal( expected, @option_element.to_s )
   end
 
 end

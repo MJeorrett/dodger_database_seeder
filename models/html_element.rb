@@ -1,6 +1,6 @@
 class HtmlElement
 
-  def initialize( tag, contents, attributes )
+  def initialize( tag, contents, attributes=nil )
     @tag = tag
     @contents = contents
     @attributes = attributes
