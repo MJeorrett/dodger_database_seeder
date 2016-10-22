@@ -1,3 +1,5 @@
+require('pry-byebug')
+
 class HtmlElement
 
   def initialize( tag, contents="", attributes=[] )
@@ -17,7 +19,19 @@ class HtmlElement
       end
 
     end
-    html += ">#{@contents}</#{@tag}>"
+
+    html += ">"
+
+    case @contents.class.to_s
+    when 'String'
+      html += "#{@contents}"
+    when 'HtmlElement'
+      html += "\n  #{@contents}\n"
+    else
+      raise( TypeError, "type #{@contents.class} not supported")
+    end
+
+    html += "</#{@tag}>"
 
     return html
   end
