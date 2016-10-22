@@ -9,7 +9,13 @@ class HtmlTag
   def to_s()
     html = "<#{@tag}"
     for attribute, value in @attributes
-      html += " #{attribute}='#{value}'"
+
+      if value == :boolean
+        html += " #{attribute}"
+      else
+        html += " #{attribute}='#{value}'"
+      end
+      
     end
     html += ">#{@contents}</#{@tag}>"
 
