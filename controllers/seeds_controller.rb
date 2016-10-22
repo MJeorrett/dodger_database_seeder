@@ -1,5 +1,4 @@
-require('sinatra')
-require('sinatra/contrib/all')
+require_relative('../app')
 
 # INDEX
 get '/databases/:dbname/:table_name/seeds' do

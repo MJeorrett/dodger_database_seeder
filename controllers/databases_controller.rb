@@ -1,3 +1,4 @@
+require_relative('../app')
 require_relative('../models/database')
 require_relative('../models/html_element')
 require_relative('../models/html_table')
@@ -35,7 +36,7 @@ get '/databases/:dbname' do
   tables_data = Database.tables_for_database( @db_name )
 
   if tables_data.empty?
-    @tables_html = "<h3><i>-- No data --</i></h3>"
+    @tables_html = NO_DATA_MESSAGE
   else
 
     tables_data.map do |table_data|
