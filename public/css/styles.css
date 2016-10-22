@@ -16,6 +16,10 @@ h3 {
   font-size: 2em;
 }
 
+i {
+  font-style: italic;
+}
+
 
 /* TABLES */
 table, thead, th, tr, td {

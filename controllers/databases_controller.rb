@@ -35,7 +35,7 @@ get '/databases/:dbname' do
   tables_data = Database.tables_for_database( @db_name )
 
   if tables_data.empty?
-    @tables_html = "<h3>-- No data --</h3>"
+    @tables_html = "<h3><i>-- No data --</i></h3>"
   else
     @tables_html = HtmlTable.generate_table( tables_data )
   end
