@@ -49,7 +49,12 @@ class HtmlElementTest < MiniTest::Test
   end
 
   def test_single_nested_element()
-
+    nested_element = HtmlElement.new( 'div', @a_element )
+    expected =
+"<div>
+  <a id='this_link' class='important' href='www.html.com'>Click me!</a>
+</div>"
+    assert_equal( expected, nested_element.to_s )
   end
 
 end
