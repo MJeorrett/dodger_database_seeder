@@ -2,10 +2,10 @@ require('pg')
 
 class SqlRunner
 
-  def self.run( sql, strip_results=false )
+  def self.run( dname, sql, strip_results=false )
 
     begin
-      db = PG.connect({ dbname: 'pizza_shop', host: 'localhost' })
+      db = PG.connect({ dbname: dname, host: 'localhost' })
       result = db.exec( sql )
 
     ensure
