@@ -1,4 +1,4 @@
-require('../db/sql_runner')
+require_relative('../db/sql_runner')
 
 class Database
 
@@ -8,9 +8,10 @@ class Database
     @name = name
   end
 
-  def all_names()
+  def self.all_names()
     sql = "SELECT datname FROM pg_database WHERE datistemplate = false"
-    results = SqlRunner.run( sql, true )
+    results = SqlRunner.run( 'user', sql, true )
+
     return results
   end
 
