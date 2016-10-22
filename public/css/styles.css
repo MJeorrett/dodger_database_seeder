@@ -34,7 +34,7 @@ a {
 .breadcrumb {
   display: inline-block;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .breadcrumb-current {
@@ -52,6 +52,7 @@ a {
 table, thead, th, tr, td {
   border-color: dodgerblue;
   border-style: solid;
+  margin: 12px;
 }
 
 td, th {
