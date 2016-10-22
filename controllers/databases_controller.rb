@@ -1,5 +1,10 @@
+require_relative('../models/database')
+require_relative('../models/html_table')
+
 get '/databases' do
-  "Error 600: Matthew laziness error<br /><br />GET '/databases' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+  names_data = Database.all_names()
+  @table_html = HtmlTable.generate_table( names_data )
+  erb(:'databases/index')
 end
 
 get '/databases/new' do
