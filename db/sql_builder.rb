@@ -67,14 +67,6 @@ class SqlBuilder
     return "SELECT #{other_table}.* FROM #{other_table} INNER JOIN #{join_table} ON #{other_table}.id = #{join_table}.#{other_join_column} WHERE #{join_table}.#{join_column} = #{id}"
   end
 
-  def self.get_table_columns_sql( table_name )
-    columns_table_name = "#{DB_NAME}.information_schema.columns"
-    select_statement = self.all_records_sql(columns_table_name)
-    condition = { table_name: table_name }
-    where_clause = self.where_clause( condition )
-    return "#{select_statement} #{where_clause}"
-  end
-
   def self.get_columns_and_values( values_hash )
     columns_array = []
     values_array = []
