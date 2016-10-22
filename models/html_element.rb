@@ -25,8 +25,17 @@ class HtmlElement
     case @contents.class.to_s
     when 'String'
       html += "#{@contents}"
+
     when 'HtmlElement'
       html += "\n  #{@contents}\n"
+
+    when 'Array'
+      html += "\n"
+
+      @contents.each do |element|
+        html += "  #{element}\n"
+      end
+      
     else
       raise( TypeError, "type #{@contents.class} not supported")
     end
