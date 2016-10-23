@@ -39,6 +39,16 @@ a {
   text-transform: uppercase;
 }
 
+.button {
+  border: 3px dodgerblue solid;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 24px;
+  margin: 12px;
+  padding: 5px 7px;
+  text-decoration: none;
+}
+
 .no-data {
   color: lightgrey;
   font-size: 2em;
@@ -47,6 +57,11 @@ a {
 
 #container {
   padding: 30px;
+}
+
+hr {
+  border-color: dodgerblue;
+  margin: 25px 0px 15px 0px;
 }
 
 
@@ -73,7 +88,7 @@ thead {
   color: white;
 }
 
-tr:hover {
+tr:hover, .button:hover {
   background-color: lightblue;
 }
 
