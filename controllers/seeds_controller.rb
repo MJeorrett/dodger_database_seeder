@@ -1,7 +1,11 @@
 require_relative('../app')
+require_relative('../models/seed')
+require_relative('../models/seed_setting')
 
 # INDEX
 get '/databases/:dbname/:table_name/seeds' do
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
   seeds_data = Seed.all_for_table_in_database( params[:table_name], params[:dbname] )
 
   if seeds_data.empty?
@@ -18,6 +22,8 @@ get '/databases/:dbname/:table_name/seeds' do
 
     @table_html = HtmlTable.generate_table( seeds_data )
   end
+
+  erb(:'seeds/index')
 end
 
 # NEW
