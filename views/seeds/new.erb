@@ -5,3 +5,8 @@
   <a href="/databases/<%= @db_name %>/<%= @table_name %>/seeds">seeds</a> /
   <span class="breadcrumb-current">new</span>
 </span>
+
+<form action="/databases/<%= @db_name %>/<%= @table_name %>/seeds" method="post">
+  <label for="seed_name">Seed Name:</label>
+    <input id="seed_name" type="text" name="seed_name" />
+</form>
