@@ -11,6 +11,16 @@ class Database
     return results
   end
 
+  def self.columns_for_table( db_name, table_name )
+    sql =
+    "SELECT column_name
+      FROM information_schema.columns
+      WHERE table_name = '#{table_name}'"
+      
+      results = SqlRunner.run( db_name, sql, true )
+      return results
+  end
+
   def self.all_names()
     sql = "SELECT datname FROM pg_database WHERE datistemplate = false"
     results = SqlRunner.run( 'user', sql, true )

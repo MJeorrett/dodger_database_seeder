@@ -1,4 +1,5 @@
 require_relative('../app')
+require_relative('../models/database')
 require_relative('../models/seed')
 require_relative('../models/seed_setting')
 
@@ -28,7 +29,8 @@ end
 
 # NEW
 get '/databases/:dbname/:table_name/seeds/new' do
-  "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname/:table_name/seeds/new' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+  @column_names = Database.columns_for_table( params[:dbname], params[:table_name] )
+  "columns for table #{params[:table_name]} are : #{@column_names}"
 end
 
 # CREATE
