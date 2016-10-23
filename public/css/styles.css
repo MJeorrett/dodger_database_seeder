@@ -81,7 +81,7 @@ th {
   font-size: 18px;
 }
 
-th:hover {
+.header-row:hover {
   background-color: dodgerblue;
 }
 
