@@ -29,8 +29,10 @@ end
 
 # NEW
 get '/databases/:dbname/:table_name/seeds/new' do
-  @column_names = Database.columns_for_table( params[:dbname], params[:table_name] )
-  "columns for table #{params[:table_name]} are : #{@column_names}"
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
+  @column_names = Database.columns_for_table( @db_name, @table_name )
+  erb(:'seeds/new')
 end
 
 # CREATE

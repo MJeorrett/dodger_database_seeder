@@ -2,9 +2,6 @@
   <a href="/databases">databases</a> /
   <a href="/databases/<%= @db_name %>"><%= @db_name %></a> /
   <%= @table_name %> /
-  <span class="breadcrumb-current">seeds</span>
+  <a href="/databases/<%= @db_name %>/<%= @table_name %>/seeds">seeds</a> /
+  <span class="breadcrumb-current">new</span>
 </span>
-
-<%= @table_html %>
-
-<a href="/databases/<%= @db_name %>/<%= @table_name %>/seeds/new">NEW SEED</a>
