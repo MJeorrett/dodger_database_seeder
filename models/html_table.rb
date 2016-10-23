@@ -9,10 +9,12 @@ class HtmlTable
     end
 
     th_elements = column_names.map do |column|
-      HtmlElement.new( 'th', column )
+      th_element = HtmlElement.new( 'th', column )
+      th_element
     end
 
-    thead = HtmlElement.new( 'thead', th_elements )
+    thead_row = HtmlElement.new( 'tr', th_elements, { class: 'header-row'} )
+    thead = HtmlElement.new( 'thead', thead_row )
 
     tr_elements = data.map do |row|
       td_elements = row.values.map do |value|
