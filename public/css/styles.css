@@ -19,10 +19,6 @@ h3 {
   font-size: 2em;
 }
 
-i {
-  font-style: italic;
-}
-
 a:visited {
   color: dodgerblue;
 }
@@ -41,6 +37,12 @@ a {
   font-weight: bold;
   font-size: 40px;
   text-transform: uppercase;
+}
+
+.no-data {
+  color: lightgrey;
+  font-size: 2em;
+  font-style: italic;
 }
 
 #container {
