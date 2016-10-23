@@ -5,26 +5,14 @@ class HtmlElement
   attr_reader :tag
 
   def initialize( tag, contents="", attributes=[] )
+
     @tag = tag
 
-    case contents.class.to_s
-    when 'String'
-      @contents = contents
-
-    when 'HtmlElement'
-      @contents = [ "  " + contents.to_s ]
-
-    when 'Array'
-      @contents = []
-      contents.each do |element|
-        element_lines = element.get_lines
-        element_lines.each { |line| @contents.push( "  " + line ) }
-      end
-
-    else
+    if !['String', 'HtmlElement', 'Array'].include?( contents.class.to_s)
       raise( TypeError, "type #{@contents.class} not supported")
     end
 
+    @contents = contents
     @attributes = attributes
   end
 
@@ -56,11 +44,27 @@ class HtmlElement
 
   def get_lines()
 
-    if @contents.class.to_s == 'String'
-      lines = [self.opening_tag + @contents + self.closing_tag]
-    else
-      lines = [self.opening_tag] + @contents + [self.closing_tag]
+    case @contents.class.to_s
+    when 'String'
+      lines = [opening_tag() + @contents + closing_tag()]
+
+    when 'HtmlElement'
+      lines = [self.opening_tag]
+      @contents.get_lines.each do |contents_line|
+        lines << "  " + contents_line
+      end
+      lines << self.closing_tag
+
+    when 'Array'
+      lines = [self.opening_tag]
+      @contents.each do |element|
+        element.get_lines.each do |element_line|
+          lines << "  " + element_line
+        end
+      end
+      lines << self.closing_tag
     end
+    
   end
 
 end
