@@ -21,6 +21,16 @@ class Database
       return results
   end
 
+  def self.datatype_for_column( db_name, table_name, column_name )
+    sql =
+    "SELECT data_type
+      FROM information_schema.columns
+      WHERE table_name = '#{table_name}' AND
+        column_name = '#{column_name}'"
+    results = SqlRunner.run( db_name, sql, true )
+    return results.first['data_type']
+  end
+
   def self.all_names()
     sql = "SELECT datname FROM pg_database WHERE datistemplate = false"
     results = SqlRunner.run( 'user', sql, true )
