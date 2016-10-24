@@ -6,26 +6,14 @@ require_relative('../models/html_table')
 require_relative('../models/html_element')
 require_relative('../models/data_file')
 
+enable(:sessions)
+
 # INDEX
 get '/databases/:dbname/:table_name/seeds' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
-  seeds_data = Seed.all_for_table_in_database( params[:table_name], params[:dbname] )
-
-  if seeds_data.empty?
-    @table_html = NO_DATA_MESSAGE
-  else
-    seeds_data.each do |seed_data|
-      seed_settings = SeedSettings.all_for_seed_id( seed_data[:id] )
-      seed_settings.each do |seed_seeting|
-        target_column = seed_setting['target_column']
-        source_file = seed_setting['source_file']
-        seed_data[target_column] = source_file
-      end
-    end
-
-    @table_html = HtmlTable.generate_table( seeds_data )
-  end
+  @seeds = Seed.all_for_table_in_database( params[:table_name], params[:dbname] )
+  @no_data_message = NO_DATA_MESSAGE
 
   erb(:'seeds/index')
 end
@@ -36,6 +24,7 @@ get '/databases/:dbname/:table_name/seeds/new' do
   @table_name = params[:table_name]
   @target_columns = Database.columns_for_table( @db_name, @table_name )
   @target_columns.delete( "id" )
+  session[:target_columns] = @target_columns
   @seeds = Seed.all_for_table_in_database( @table_name, @db_name )
   @file_names = DataFile.all_names()
 
@@ -44,7 +33,10 @@ end
 
 # CREATE
 post '/databases/:dbname/:table_name/seeds' do
-  "Error 600: Matthew laziness error<br /><br />POST '/databases/:dbname/:table_name/seeds' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+  db_name = params[:dbname]
+  table_name = params[:table_name]
+  Seed.save( params, db_name, table_name, session[:target_columns] )
+  redirect to( "/databses/#{db_name}/#{table_name}/seeds")
 end
 
 # SHOW

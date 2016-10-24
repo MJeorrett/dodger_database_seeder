@@ -7,7 +7,23 @@
 
 <hr>
 
-<%= @table_html %>
+<%
+  @table_data = []
+  @seeds.each do |seed|
+
+    row_data = {
+      id: seed.id,
+      name: seed.name,
+    }
+
+    seed.settings.each do |setting|
+      row_data[setting.target_column] = setting.source_file
+    end
+
+    @table_data.push( row_data )
+  end
+%>
+<%= erb(:'partials/table') %>
 
 <hr>
 
