@@ -8,7 +8,7 @@ class Seed
   DB_NAME = 'dodas'
   TABLE_NAME = 'seeds'
 
-  attr_reader :id, :name, :target_database, :target_table
+  attr_reader :id, :name, :target_database, :target_table, :settings
 
   def initialize( data )
 
@@ -19,7 +19,7 @@ class Seed
     @target_table = data['target_table']
 
     if @id != nil
-      @settings = Seed.all_for_seed_id( @id )
+      @settings = SeedSetting.all_for_seed_id( @id )
     end
 
   end
@@ -49,7 +49,7 @@ class Seed
         'target_column' => target_column,
         'source_file' => data[target_column]
       }
-      seed_setting = Seed.new( setting_data )
+      seed_setting = SeedSetting.new( setting_data )
       seed_setting.save()
     end
   end

@@ -9,8 +9,8 @@ class SeedTest < MiniTest::Test
     data = {
       'id' => '14',
       'name' => "rock_albums",
-      'db_name' => "music_library",
-      'table_name' => "albums"
+      'target_database' => "music_library",
+      'target_table' => "albums"
     }
 
     @test_seed_1 = Seed.new( data )
