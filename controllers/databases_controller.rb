@@ -1,7 +1,6 @@
 require_relative('../app')
 require_relative('../models/database')
 require_relative('../models/html_element')
-require_relative('../models/html_table')
 
 # INDEX
 get '/databases' do

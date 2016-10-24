@@ -2,7 +2,6 @@ require_relative('../app')
 require_relative('../models/database')
 require_relative('../models/seed')
 require_relative('../models/seed_setting')
-require_relative('../models/html_table')
 require_relative('../models/html_element')
 require_relative('../models/data_file')
 
