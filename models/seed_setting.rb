@@ -16,6 +16,9 @@ class SeedSetting
     @seed_id = data['seed_id'].to_i
     @target_column = data['target_column']
 
+    seed = self.seed()
+    @target_data_type = Database.datatype_for_column( seed.target_database, seed.target_table, @target_column )
+
     source_file_key = data.keys.find { |key| key.start_with?('source_file_') }
     @source_file = data[source_file_key] || data['source_file']
 
@@ -44,6 +47,10 @@ class SeedSetting
     @id = id
   end
 
+  def seed()
+    Seed.find_by_id( @seed_id )
+  end
+
   def to_s()
     if @source_file.nil?
       string = "number: #{@min} to #{@max}"
@@ -58,6 +65,12 @@ class SeedSetting
     settings_data = SqlInterface.all_where( DB_NAME, TABLE_NAME, { seed_id: seed_id } )
     settings_models = ModelBuilder.models_from_data( SeedSetting, settings_data )
     return settings_models
+  end
+
+  def self.find_by_id( id )
+    setting_data = SqlInterface.find_by_id( DB_NAME, TABLE_NAME, id )
+    setting = ModelBuilder.model_from_data( SeedSetting, setting_data )
+    return setting
   end
 
 end

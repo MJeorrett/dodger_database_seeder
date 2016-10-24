@@ -9,7 +9,7 @@ class Seed
   DB_NAME = 'dodas'
   TABLE_NAME = 'seeds'
 
-  attr_reader :id, :name, :target_database, :target_table, :settings
+  attr_reader :id, :name, :target_database, :target_table
 
   def initialize( data )
 
@@ -19,19 +19,23 @@ class Seed
     @target_database = data['target_database']
     @target_table = data['target_table']
 
-    if @id != nil
-      @settings = SeedSetting.all_for_seed_id( @id )
-    end
+  end
 
+  def settings()
+    if @id.nil?
+      settings = []
+    else
+      settings = SeedSetting.all_for_seed_id( @id )
+    end
   end
 
   def run( count )
     seed_values = {}
 
-    @settings.each do |setting|
+    settings().each do |setting|
 
       if setting.source_file.nil?
-        
+
         if setting.min % 1 != 0 || setting.max % 1 != 0
           values = FloatGenerator.new( setting.min, setting.max )
         else
