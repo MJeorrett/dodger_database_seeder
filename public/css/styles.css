@@ -106,6 +106,10 @@ table, thead, th, tr, td {
   margin: 12px;
 }
 
+table {
+  margin: 25px 12px;
+}
+
 td, th {
   border-width: 1.5px;
   padding: 5px 7px;
