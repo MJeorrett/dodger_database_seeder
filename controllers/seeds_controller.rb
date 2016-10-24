@@ -2,6 +2,8 @@ require_relative('../app')
 require_relative('../models/database')
 require_relative('../models/seed')
 require_relative('../models/seed_setting')
+require_relative('../models/html_table')
+require_relative('../models/html_element')
 
 # INDEX
 get '/databases/:dbname/:table_name/seeds' do
@@ -31,7 +33,29 @@ end
 get '/databases/:dbname/:table_name/seeds/new' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
-  @column_names = Database.columns_for_table( @db_name, @table_name )
+  column_names = Database.columns_for_table( @db_name, @table_name )
+  table_data = []
+  column_names.each do |column_name|
+
+    column = column_name['column_name']
+
+    label = HtmlElement.new( 'label', column, { for: column } )
+
+    input_attributes = {
+      id: column,
+      type: 'text',
+      name: column
+    }
+    input = HtmlElement.new( 'input', "", input_attributes )
+
+    table_data.push( {
+      'column_name' => label.to_s,
+      'source_file' => input.to_s
+    } )
+  end
+
+  @table_html = HtmlTable.generate_table( table_data )
+
   erb(:'seeds/new')
 end
 

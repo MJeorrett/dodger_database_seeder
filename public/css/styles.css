@@ -64,6 +64,10 @@ a {
   padding: 30px;
 }
 
+label {
+  cursor: pointer;
+}
+
 input {
   color: dodgerblue;
   padding: 3px;
