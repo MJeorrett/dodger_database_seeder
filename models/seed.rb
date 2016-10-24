@@ -54,4 +54,10 @@ class Seed
     end
   end
 
+  def self.find_by_id( id )
+    seed_data = SqlInterface.find_by_id( DB_NAME, TABLE_NAME, id )
+    seed = ModelBuilder.model_from_data( Seed, seed_data )
+    return seed
+  end
+
 end

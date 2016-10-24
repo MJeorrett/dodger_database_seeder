@@ -41,7 +41,11 @@ end
 
 # SHOW
 get '/databases/:dbname/:table_name/seeds/:id' do
-  "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname/:table_name/seeds/:id' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
+  @seed = Seed.find_by_id( params[:id] )
+
+  erb( :'seeds/show')
 end
 
 # EDIT
