@@ -85,17 +85,27 @@ class SqlBuilder
 
   def self.value_to_sql( value )
     value_class = value.class().to_s()
+    
     case value_class
+
     when 'Fixnum'
       sql = "#{value}"
+
     when 'Float'
       sql = "#{value}"
+
     when 'String'
       sql = "'#{value.gsub("'", "''")}'"
+
     when 'TrueClass'
       sql = "TRUE"
+
     when 'FalseClass'
       sql = "FALSE"
+
+    when 'NilClass'
+      sql = "NULL"
+
     else
       raise(TypeError, "Un-supported data type class: #{value_class}.")
     end
