@@ -1,20 +1,24 @@
-<table>
-  <thead>
-    <tr class="header-row">
-      <% column_names = [] %>
-      <% @table_data.first.keys.each do |column_name| %>
-        <th><%= column_name %></th>
-        <% column_names.push( column_name ) %>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @table_data.each do |data_row| %>
-      <tr>
-        <% column_names.each do |column_name| %>
-          <td><%= data_row[column_name] %></td>
+<% if @table_data.empty? %>
+  <%= erb(:'partials/no_data_message') %>
+<% else %>
+  <table>
+    <thead>
+      <tr class="header-row">
+        <% column_names = [] %>
+        <% @table_data.first.keys.each do |column_name| %>
+          <th><%= column_name %></th>
+          <% column_names.push( column_name ) %>
         <% end %>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @table_data.each do |data_row| %>
+        <tr>
+          <% column_names.each do |column_name| %>
+            <td><%= data_row[column_name] %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

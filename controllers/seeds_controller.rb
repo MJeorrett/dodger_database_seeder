@@ -12,7 +12,6 @@ get '/databases/:dbname/:table_name/seeds' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
   @seeds = Seed.all_for_table_in_database( params[:table_name], params[:dbname] )
-  @no_data_message = NO_DATA_MESSAGE
 
   erb(:'seeds/index')
 end

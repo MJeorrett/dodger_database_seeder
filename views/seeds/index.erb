@@ -7,27 +7,24 @@
 
 <hr>
 
-<% if @seeds.empty? %>
-  <%= @no_data_message %>
-<% else
-  @table_data = []
-  @seeds.each do |seed|
+<%
+@table_data = []
+@seeds.each do |seed|
 
-    row_data = {
-      id: seed.id,
-      seed_name: "<a href='/databases/#{@db_name}/#{@table_name}/seeds/#{seed.id}'>#{seed.name}</a>"
-    }
+  row_data = {
+    id: seed.id,
+    seed_name: "<a href='/databases/#{@db_name}/#{@table_name}/seeds/#{seed.id}'>#{seed.name}</a>"
+  }
 
-    seed.settings.each do |setting|
-      column = setting.target_column
-      row_data[column] = setting.to_s
-    end
+  seed.settings.each do |setting|
+    column = setting.target_column
+    row_data[column] = setting.to_s
+  end
 
-    @table_data.push( row_data )
-  end %>
+  @table_data.push( row_data )
+end %>
 
-  <%= erb(:'partials/table') %>
-<% end %>
+<%= erb(:'partials/table') %>
 
 <hr>
 
