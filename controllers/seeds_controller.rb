@@ -49,9 +49,10 @@ get '/databases/:dbname/:table_name/seeds/:id' do
 end
 
 # RUN
-
 post '/databases/:dbname/:table_name/seeds/:id/run' do
-  "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname/:table_name/seeds/:id/run' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+  seed = Seed.find_by_id( params[:id] )
+  seed.run( params[:number_of_runs].to_i )
+  # redirect to("/databases/#{params[:dbname]}/#{params[:table_name]}/seeds")
 end
 
 # EDIT

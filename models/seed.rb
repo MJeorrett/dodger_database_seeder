@@ -24,6 +24,26 @@ class Seed
 
   end
 
+  def run( count )
+    seed_values = {}
+
+    @settings.each do |setting|
+       values = DataFile.values_from_file( setting.source_file )
+       seed_values[setting.target_column] = values
+    end
+
+    count.times do
+      values_hash = {}
+
+      for column_name, values in seed_values
+        values_hash[column_name] = values.sample
+      end
+
+      SqlInterface.insert( @target_database, @target_table, values_hash )
+    end
+
+  end
+
   def self.all_for_table_in_database( target_table, target_database )
     conditions = {
       target_table: target_table,
