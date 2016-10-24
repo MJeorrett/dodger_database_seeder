@@ -17,6 +17,16 @@ class SeedSetting
     @source_file = data['source_file']
   end
 
+  def save()
+    values_hash = {
+      seed_id: @seed_id,
+      target_column: @target_column,
+      source_file: @source_file
+    }
+    id = SqlInterface.insert( DB_NAME, TABLE_NAME, values_hash )
+    @id = id
+  end
+
   def self.all_for_seed_id( seed_id )
     settings_data = SqlInterface.all_where( DB_NAME, TABLE_NAME, { seed_id: seed_id } )
     settings_models = ModelBuilder.models_from_data( SeedSetting, settings_data )
