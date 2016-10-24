@@ -48,6 +48,12 @@ get '/databases/:dbname/:table_name/seeds/:id' do
   erb( :'seeds/show')
 end
 
+# RUN
+
+post '/databases/:dbname/:table_name/seeds/:id/run' do
+  "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname/:table_name/seeds/:id/run' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+end
+
 # EDIT
 get '/databases/:dbname/:table_name/seeds/:id/edit' do
   "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname/:table_name/seeds/:id/edit' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
