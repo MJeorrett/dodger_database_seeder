@@ -20,7 +20,7 @@
 
     seed.settings.each do |setting|
       column = setting.target_column
-      row_data[column] = setting.source_file
+      row_data[column] = setting.to_s
     end
 
     @table_data.push( row_data )

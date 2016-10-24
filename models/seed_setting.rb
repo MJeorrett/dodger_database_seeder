@@ -38,6 +38,16 @@ class SeedSetting
     @id = id
   end
 
+  def to_s()
+    if @source_file.nil?
+      string = "number: #{@min} to #{@max}"
+    else
+      string = "file: #{@source_file}"
+    end
+
+    return string
+  end
+
   def self.all_for_seed_id( seed_id )
     settings_data = SqlInterface.all_where( DB_NAME, TABLE_NAME, { seed_id: seed_id } )
     settings_models = ModelBuilder.models_from_data( SeedSetting, settings_data )
