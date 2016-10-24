@@ -34,19 +34,12 @@ end
 # SHOW
 get '/databases/:dbname' do
   @db_name = params[:dbname]
-  tables_data = Database.tables_for_database( @db_name )
+  @table_data = Database.tables_for_database( @db_name )
 
-  if tables_data.empty?
-    @tables_html = NO_DATA_MESSAGE
-  else
-
-    tables_data.map do |table_data|
-      href = "/databases/#{@db_name}/#{table_data['table_name']}/seeds"
-      seeds_link = HtmlElement.new( 'a', 'seeds', { href: href })
-      table_data['seeds_link'] = seeds_link
-    end
-
-    @tables_html = HtmlTable.generate_table( tables_data, [ "Table Name", "" ] )
+  @table_data.map do |table_data_row|
+    href = "/databases/#{@db_name}/#{table_data_row['table_name']}/seeds"
+    seeds_link = HtmlElement.new( 'a', 'seeds', { href: href })
+    table_data_row['seeds_link'] = seeds_link
   end
 
   erb(:'databases/show')
