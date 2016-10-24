@@ -14,7 +14,14 @@ class SeedSetting
     @id = id.to_i if id != nil
     @seed_id = data['seed_id'].to_i
     @target_column = data['target_column']
-    @source_file = data['source_file']
+
+    source_file_key = data.keys.find { |key| key.start_with?('source_file_') }
+
+    if source_file_key == nil
+      @source_file = data['source_file']
+    else
+      @source_file = data[source_file_key]
+    end
   end
 
   def save()
