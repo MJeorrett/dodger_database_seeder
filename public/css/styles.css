@@ -46,6 +46,7 @@ a {
 }
 
 .button, input {
+  background-color: white;
   border: 3px dodgerblue solid;
 }
 

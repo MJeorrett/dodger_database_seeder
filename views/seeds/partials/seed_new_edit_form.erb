@@ -1,0 +1,29 @@
+<form action="/databases/<%= @db_name %>/<%= @table_name %>/seeds" method="post">
+  <label for="seed_name">Seed Name:</label>
+    <input id="seed_name" type="text" name="seed_name" />
+
+  <table>
+    <thead>
+      <tr>
+        <th>Column</th>
+        <th>Data File</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @column_names.each do |column_name| %>
+      <tr>
+        <td><%= column_name %></td>
+        <td>
+          <select name="<%= column_name %>">
+            <% @file_names.each do |file_name| %>
+              <option value="<%= file_name %>"><%= file_name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <input class="button" type="submit" value="Submit" />
+</form>

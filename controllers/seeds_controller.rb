@@ -34,30 +34,10 @@ end
 get '/databases/:dbname/:table_name/seeds/new' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
-  column_names = Database.columns_for_table( @db_name, @table_name )
-  table_data = []
-  column_names.each do |column_name|
-
-    column = column_name['column_name']
-
-    label = HtmlElement.new( 'label', column, { for: column } )
-
-    input_attributes = {
-      id: column,
-      type: 'text',
-      name: column
-    }
-    input = HtmlElement.new( 'input', "", input_attributes )
-
-    table_data.push( {
-      'column_name' => label.to_s,
-      'source_file' => input.to_s
-    } )
-  end
-
-  @table_html = HtmlTable.generate_table( table_data )
-
-  file_names = DataFile.all_names()
+  @column_names = Database.columns_for_table( @db_name, @table_name )
+  @column_names.delete( "id" )
+  @seeds = Seed.all_for_table_in_database( @table_name, @db_name )
+  @file_names = DataFile.all_names()
 
   erb(:'seeds/new')
 end

@@ -16,8 +16,9 @@ class Database
     "SELECT column_name
       FROM information_schema.columns
       WHERE table_name = '#{table_name}'"
-      
+
       results = SqlRunner.run( db_name, sql, true )
+      results.map! { |result| result['column_name'] }
       return results
   end
 
