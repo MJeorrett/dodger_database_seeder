@@ -15,6 +15,6 @@ CREATE TABLE seed_settings (
   seed_id INT4 REFERENCES seeds(id),
   target_column VARCHAR(100),
   source_file VARCHAR(255),
-  min DECIMAL(10, 2),
-  max DECIMAL(10, 2)
+  min DECIMAL(25, 10),
+  max DECIMAL(25, 10)
 );
