@@ -52,7 +52,7 @@ end
 post '/databases/:dbname/:table_name/seeds/:id/run' do
   seed = Seed.find_by_id( params[:id] )
   seed.run( params[:number_of_runs].to_i )
-  # redirect to("/databases/#{params[:dbname]}/#{params[:table_name]}/seeds")
+  redirect to("/databases/#{params[:dbname]}/#{params[:table_name]}/seeds")
 end
 
 # EDIT
