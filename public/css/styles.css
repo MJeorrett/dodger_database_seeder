@@ -84,6 +84,15 @@ input {
   padding: 3px;
 }
 
+input:disabled {
+  color: lightgrey;
+  border: 1px solid lightgrey;
+}
+
+input[type="number"] {
+  width: 60px;
+}
+
 hr {
   border: 1px dodgerblue solid;
   margin: 25px 0px 25px 0px;

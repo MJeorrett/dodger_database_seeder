@@ -18,19 +18,28 @@
           <td><%= target_column %> :</td>
           <%
           if target_column_data['data_type'] == 'character varying'
-            disabled = ""
+            source_file_disabled = ""
           else
-            disabled = "disabled"
+            source_file_disabled = "disabled"
           end
           %>
           <td>
-            <select name="source_file_<%= target_column %>" <%= disabled %>>
+            <select name="source_file_<%= target_column %>" <%= source_file_disabled %>>
               <% @file_names.each do |file_name| %>
                 <option value="<%= file_name %>"><%= file_name %></option>
               <% end %>
             </select>
           </td>
-          <td></td>
+          <%
+          if target_column_data['data_type'] == 'integer'
+            number_disabled = ""
+          else
+            number_disabled = "disabled"
+          end
+          %>
+          <td>
+            <input type="number" name="number_max_<%= target_column %>" min="0" step="1" <%= number_disabled %>>
+          </td>
           <td></td>
         </tr>
       <% end %>
