@@ -20,10 +20,16 @@ class SeedSetting
     @source_file = data[source_file_key] || data['source_file']
 
     min_key = data.keys.find { |key| key.start_with?('min_')}
-    @min = ( data[min_key] || data['min'] ).to_i
+    @min = ( data[min_key] || data['min'] ).to_f
+    if @min % 1 == 0
+      @min = @min.to_i
+    end
 
     max_key = data.keys.find { |key| key.start_with?('max_')}
-    @max = ( data[max_key] || data['max'] ).to_i
+    @max = ( data[max_key] || data['max'] ).to_f
+    if @max % 1 == 0
+      @max = @max.to_i
+    end
   end
 
   def save()

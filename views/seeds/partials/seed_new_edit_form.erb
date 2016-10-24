@@ -30,18 +30,29 @@
               <% end %>
             </select>
           </td>
+
           <%
-          if target_column_data['data_type'] == 'integer'
+          data_type = target_column_data['data_type']
+
+          if ['integer', 'smallint', 'numeric'].include?( data_type )
             number_attributes = "required"
           else
             number_attributes = "disabled"
           end
+
+          if ['integer', 'smallint'].include?( data_type )
+            step_att = "step='1'"
+          else
+            step_att = "step='any'"
+          end
           %>
+
           <td>
-            <input type="number" name="min_<%= target_column %>" min="0" step="1" <%= number_attributes %>>
+            <input type="number" name="min_<%= target_column %>" min="0" <%= step_att %> <%= number_attributes %>>
           </td>
+
           <td>
-            <input type="number" name="max_<%= target_column %>" min="0" step="1" <%= number_attributes %>>
+            <input type="number" name="max_<%= target_column %>" min="0" <%= step_att %> <%= number_attributes %>>
           </td>
         </tr>
       <% end %>

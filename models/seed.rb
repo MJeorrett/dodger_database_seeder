@@ -2,6 +2,7 @@ require_relative('../db/sql_interface')
 require_relative('./model_builder')
 require_relative('./html_element')
 require_relative('./seed_setting')
+require_relative('./float_generator')
 
 class Seed
 
@@ -28,8 +29,20 @@ class Seed
     seed_values = {}
 
     @settings.each do |setting|
-       values = DataFile.values_from_file( setting.source_file )
-       seed_values[setting.target_column] = values
+
+      if setting.source_file.nil?
+        
+        if setting.min % 1 != 0 || setting.max % 1 != 0
+          values = FloatGenerator.new( setting.min, setting.max )
+        else
+          values = (setting.min..setting.max).to_a
+        end
+
+      else
+        values = DataFile.values_from_file( setting.source_file )
+      end
+
+      seed_values[setting.target_column] = values
     end
 
     count.times do
