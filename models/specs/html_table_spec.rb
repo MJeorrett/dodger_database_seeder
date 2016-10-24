@@ -22,8 +22,10 @@ class HtmlTableTest < MiniTest::Test
     expected =
 "<table>
   <thead>
-    <th>column_1</th>
-    <th>column_2</th>
+    <tr class='header-row'>
+      <th>column_1</th>
+      <th>column_2</th>
+    </tr>
   </thead>
   <tr>
     <td>col1_val1</td>
@@ -44,8 +46,10 @@ class HtmlTableTest < MiniTest::Test
     expected =
 "<table>
   <thead>
-    <th>Column 1</th>
-    <th>Column 2</th>
+    <tr class='header-row'>
+      <th>Column 1</th>
+      <th>Column 2</th>
+    </tr>
   </thead>
   <tr>
     <td>col1_val1</td>
