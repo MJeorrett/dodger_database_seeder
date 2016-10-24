@@ -4,6 +4,7 @@ require_relative('../models/seed')
 require_relative('../models/seed_setting')
 require_relative('../models/html_table')
 require_relative('../models/html_element')
+require_relative('../models/data_file')
 
 # INDEX
 get '/databases/:dbname/:table_name/seeds' do
@@ -55,6 +56,8 @@ get '/databases/:dbname/:table_name/seeds/new' do
   end
 
   @table_html = HtmlTable.generate_table( table_data )
+
+  file_names = DataFile.all_names()
 
   erb(:'seeds/new')
 end
