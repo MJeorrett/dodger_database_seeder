@@ -16,6 +16,6 @@
 
 <form action='<%= "/databases/#{@db_name}/#{@table_name}/seeds/#{@seed.id}/run" %>' method="post">
   <label for="number-of-runs">Number of runs:</label>
-    <input id="number-of-runs" type="number" min="0" step="1" name="number-of-runs" />
+    <input id="number-of-runs" type="number" min="0" max="100" step="1" name="number-of-runs" />
   <input class="button" type="submit" value="GO!" />
 </form>
