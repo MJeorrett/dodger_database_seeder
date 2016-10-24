@@ -37,7 +37,7 @@ class Seed
 
   def self.save( data, target_database, target_table, target_columns )
     values_hash = {
-      'seed_name' => data[:seed_name],
+      'seed_name' => data['seed_name'],
       'target_database' => target_database,
       'target_table' => target_table
     }
