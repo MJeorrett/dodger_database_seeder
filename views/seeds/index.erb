@@ -7,24 +7,27 @@
 
 <hr>
 
-<%
+<% if @seeds.empty? %>
+  <%= @no_data_message %>
+<% else
   @table_data = []
   @seeds.each do |seed|
 
     row_data = {
       id: seed.id,
-      name: seed.name,
+      seed_name: seed.name,
     }
 
     seed.settings.each do |setting|
-      row_data[setting.target_column] = setting.source_file
+      column = setting.target_column
+      row_data[column] = setting.source_file
     end
 
     @table_data.push( row_data )
-  end
-%>
+  end %>
 
-<%= erb(:'partials/table') %>
+  <%= erb(:'partials/table') %>
+<% end %>
 
 <hr>
 
