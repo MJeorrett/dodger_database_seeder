@@ -15,7 +15,7 @@
 
     row_data = {
       id: seed.id,
-      seed_name: seed.name,
+      seed_name: "<a href='/databases/#{@db_name}/#{@table_name}/seeds/#{seed.id}'>#{seed.name}</a>"
     }
 
     seed.settings.each do |setting|
