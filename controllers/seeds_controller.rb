@@ -34,8 +34,8 @@ end
 get '/databases/:dbname/:table_name/seeds/new' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
-  @column_names = Database.columns_for_table( @db_name, @table_name )
-  @column_names.delete( "id" )
+  @target_columns = Database.columns_for_table( @db_name, @table_name )
+  @target_columns.delete( "id" )
   @seeds = Seed.all_for_table_in_database( @table_name, @db_name )
   @file_names = DataFile.all_names()
 

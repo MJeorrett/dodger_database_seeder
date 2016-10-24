@@ -10,11 +10,11 @@
       </tr>
     </thead>
     <tbody>
-      <% @column_names.each do |column_name| %>
+      <% @target_columns.each do |target_column| %>
       <tr>
-        <td><%= column_name %></td>
+        <td><%= target_column %></td>
         <td>
-          <select name="<%= column_name %>">
+          <select name="<%= target_column %>">
             <% @file_names.each do |file_name| %>
               <option value="<%= file_name %>"><%= file_name %></option>
             <% end %>
