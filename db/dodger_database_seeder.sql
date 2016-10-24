@@ -1,3 +1,5 @@
+-- psql -d dodas -f db/dodger_database_seeder.sql  
+
 DROP TABLE IF EXISTS seed_settings;
 DROP TABLE IF EXISTS seeds;
 
