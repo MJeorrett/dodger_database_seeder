@@ -14,7 +14,7 @@ class Seed
 
     id = data['id']
     @id = id.to_i if id != nil
-    @name = data['name']
+    @name = data['seed_name']
     @target_database = data['target_database']
     @target_table = data['target_table']
 

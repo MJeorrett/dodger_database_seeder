@@ -3,7 +3,7 @@
     <tr class="header-row">
       <% column_names = [] %>
       <% @table_data.first.keys.each do |column_name| %>
-        <th>column_name</th>
+        <th><%= column_name %></th>
         <% column_names.push( column_name ) %>
       <% end %>
     </tr>
