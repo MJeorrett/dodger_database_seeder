@@ -1,4 +1,6 @@
 require_relative('../db/sql_interface')
+require_relative('./model_builder')
+
 
 class SeedSetting
 
@@ -17,7 +19,8 @@ class SeedSetting
 
   def self.all_for_seed_id( seed_id )
     settings_data = SqlInterface.all_where( DB_NAME, TABLE_NAME, { seed_id: seed_id } )
-    return settings_data
+    settings_models = ModelBuilder.models_from_data( SeedSetting, settings_data )
+    return settings_models
   end
 
 end

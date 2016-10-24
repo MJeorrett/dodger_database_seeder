@@ -1,4 +1,6 @@
 require_relative('../db/sql_interface')
+require_relative('./model_builder')
+require_relative('./html_element')
 
 class Seed
 
@@ -21,14 +23,15 @@ class Seed
 
   end
 
-  def self.all_for_table_in_database( table_name, db_name )
-
+  def self.all_for_table_in_database( target_table, target_database )
     conditions = {
-      target_table: table_name,
-      target_database: db_name
+      target_table: target_table,
+      target_database: target_database
     }
+
     seeds_data = SqlInterface.all_where( DB_NAME, TABLE_NAME, conditions )
-    return seeds_data
+    seeds_models = ModelBuilder.models_from_data( Seed, seeds_data )
+    return seeds_models
   end
 
 end
