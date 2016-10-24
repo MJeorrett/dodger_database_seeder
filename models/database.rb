@@ -13,12 +13,11 @@ class Database
 
   def self.columns_for_table( db_name, table_name )
     sql =
-    "SELECT column_name
+    "SELECT column_name, data_type
       FROM information_schema.columns
       WHERE table_name = '#{table_name}'"
 
       results = SqlRunner.run( db_name, sql, true )
-      results.map! { |result| result['column_name'] }
       return results
   end
 

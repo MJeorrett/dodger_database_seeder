@@ -55,7 +55,7 @@ class Seed
     return seeds_models
   end
 
-  def self.save( data, target_database, target_table, target_columns )
+  def self.save( data, target_database, target_table, target_columns_data )
     values_hash = {
       'seed_name' => data['seed_name'],
       'target_database' => target_database,
@@ -63,7 +63,8 @@ class Seed
     }
     seed_id = SqlInterface.insert( DB_NAME, TABLE_NAME, values_hash )
 
-    target_columns.each do |target_column|
+    target_columns_data.each do |target_column_data|
+      target_column = target_column_data['column_name']
       setting_data = {
         'seed_id' => seed_id,
         'target_column' => target_column,

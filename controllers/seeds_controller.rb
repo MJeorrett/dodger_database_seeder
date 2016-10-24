@@ -22,9 +22,13 @@ end
 get '/databases/:dbname/:table_name/seeds/new' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
-  @target_columns = Database.columns_for_table( @db_name, @table_name )
-  @target_columns.delete( "id" )
-  session[:target_columns] = @target_columns
+
+  @target_columns_data = Database.columns_for_table( @db_name, @table_name )
+  @target_columns_data.reject! do |column_data|
+    column_data['column_name'] == 'id'
+  end
+
+  session[:target_columns_data] = @target_columns_data
   @seeds = Seed.all_for_table_in_database( @table_name, @db_name )
   @file_names = DataFile.all_names()
 
@@ -35,7 +39,7 @@ end
 post '/databases/:dbname/:table_name/seeds' do
   db_name = params[:dbname]
   table_name = params[:table_name]
-  Seed.save( params, db_name, table_name, session[:target_columns] )
+  Seed.save( params, db_name, table_name, session[:target_columns_data] )
   redirect to( "/databases/#{db_name}/#{table_name}/seeds")
 end
 

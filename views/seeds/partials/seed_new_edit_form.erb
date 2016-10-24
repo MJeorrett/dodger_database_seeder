@@ -13,7 +13,8 @@
       </tr>
     </thead>
     <tbody>
-      <% @target_columns.each do |target_column| %>
+      <% @target_columns_data.each do |target_column_data| %>
+      <% target_column = target_column_data['column_name'] %>
       <tr>
         <td><%= target_column %> :</td>
         <td>
