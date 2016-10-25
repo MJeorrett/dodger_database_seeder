@@ -13,13 +13,16 @@
     </thead>
     <tbody>
       <% @target_columns_data.each do |target_column_data| %>
-        <% target_column = target_column_data['column_name'] %>
-        <tr>
-          <td class="seed-setting-column"><%= target_column %> :</td>
 
-          <% if target_column_data['data_type'] == 'character varying' %>
+        <% column_name = target_column_data['column_name']
+
+           column_data_type = target_column_data['data_type'] %>
+        <tr>
+          <td class="seed-setting-column"><%= column_name %> :</td>
+
+          <% if column_data_type == :string %>
             <td>
-              <select name="source_file_<%= target_column %>" >
+              <select name="source_file_<%= column_name %>" >
                 <% @file_names.each do |file_name| %>
                   <option value="<%= file_name %>"><%= file_name %></option>
                 <% end %>
@@ -30,21 +33,19 @@
           <% end %>
 
           <%
-          data_type = target_column_data['data_type']
-
-          if ['integer', 'smallint'].include?( data_type )
-            step_att = "step='1'"
+          if column_data_type == :int
+            step_attribute = "step='1'"
           else
-            step_att = "step='any'"
+            step_attribute = "step='any'"
           end
           %>
 
-          <% if ['integer', 'smallint', 'numeric'].include?( data_type ) %>
+          <% if column_data_type == :int || column_data_type == :float %>
             <td>
-              <input type="number" name="min_<%= target_column %>" min="0" <%= step_att %> required>
+              <input type="number" name="min_<%= column_name %>" min="0" <%= step_attribute %> required>
             </td>
             <td>
-              <input type="number" name="max_<%= target_column %>" min="0" <%= step_att %> required>
+              <input type="number" name="max_<%= column_name %>" min="0" <%= step_attribute %> required>
             </td>
           <% else %>
             <td></td>
