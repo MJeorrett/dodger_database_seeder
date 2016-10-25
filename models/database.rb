@@ -31,6 +31,7 @@ class Database
         reference_for_column = Database.reference_for_column( db_name, table_name, result['column_name'] )
 
         if reference_for_column != nil
+          result['referenced_column'] = "#{reference_for_column['referenced_table']}.#{reference_for_column['referenced_column']}"
           simple_type = :ref
         else
           simple_type = self.sql_to_simple_type( result['data_type'] )
@@ -39,7 +40,7 @@ class Database
         result['data_type'] = simple_type
         result
       end
-      
+
       return results
   end
 

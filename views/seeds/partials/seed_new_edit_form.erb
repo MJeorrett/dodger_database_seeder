@@ -10,6 +10,7 @@
         <th>Min</th>
         <th>Max</th>
         <th>Boolean</th>
+        <th>Ref</th>
       </tr>
     </thead>
     <tbody>
@@ -54,10 +55,8 @@
             </td>
 
           <% else %>
-
             <td class="inactive-cell"></td>
             <td class="inactive-cell"></td>
-
           <% end %>
 
           <!-- BOOLEAN -->
@@ -72,10 +71,20 @@
             </td>
 
           <% else %>
-
             <td class="inactive-cell"></td>
-
           <% end %>
+
+          <!-- REFERENCE -->
+          <% if column_data_type == :ref %>
+
+            <td>
+              <p><%= target_column_data['referenced_column'] %></p>
+            </td>
+
+          <% else %>
+            <td class="inactive-cell"></td>
+          <% end %>
+
         </tr>
 
       <% end %>
