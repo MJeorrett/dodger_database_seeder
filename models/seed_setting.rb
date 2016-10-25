@@ -53,9 +53,12 @@ class SeedSetting
   end
 
   def to_s()
-    if @source_file.nil?
+
+    case @target_data_type
+    when :int, :float
       string = "#{@min} to #{@max}"
-    else
+
+    when :string
       string = "~/data/#{@source_file}"
     end
 
