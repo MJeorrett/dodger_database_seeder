@@ -28,10 +28,18 @@ class Database
 
       results = SqlRunner.run( db_name, sql, true )
       results.map! do |result|
-        simple_type = self.sql_to_simple_type( result['data_type'] )
+        reference_for_column = Database.reference_for_column( db_name, table_name, result['column_name'] )
+
+        if reference_for_column != nil
+          simple_type = :ref
+        else
+          simple_type = self.sql_to_simple_type( result['data_type'] )
+        end
+
         result['data_type'] = simple_type
         result
       end
+      
       return results
   end
 
