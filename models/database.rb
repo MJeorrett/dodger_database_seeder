@@ -70,7 +70,7 @@ WHERE
     ref_data = self.reference_for_column( db_name, table_name, column_name)
 
     if ref_data.nil?
-      result = []
+      results = []
     else
       ref_table = ref_data['referenced_table']
       ref_column = ref_data['referenced_column']
