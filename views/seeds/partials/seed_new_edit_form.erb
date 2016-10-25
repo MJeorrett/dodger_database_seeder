@@ -78,7 +78,7 @@
           <% if column_data_type == :ref %>
 
             <td>
-              <p><%= target_column_data['referenced_column'] %></p>
+              <p><%= "[#{target_column_data['referenced_column']}]" %></p>
             </td>
 
           <% else %>
