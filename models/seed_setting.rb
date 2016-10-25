@@ -7,7 +7,15 @@ class SeedSetting
   DB_NAME = 'dodas'
   TABLE_NAME = 'seed_settings'
 
-  attr_reader :id, :seed_id, :target_column, :target_data_type, :source_file, :min, :max
+  BOOL_CHOICES = {
+    'true' => true,
+    't' => true,
+    'false' => false,
+    'f' => false,
+    'random' => nil
+  }
+
+  attr_reader :id, :seed_id, :target_column, :target_data_type, :source_file, :min, :max, :bool_choice
 
   def initialize( data )
 
@@ -22,27 +30,25 @@ class SeedSetting
     @source_file = data['source_file']
 
     raw_min = data['min']
-    if @target_data_type == :int
-      @min = raw_min.to_i
-    else
-      @min = raw_min.to_f
-    end
+    @min = raw_min.to_f
+    @min = raw_min.to_i if @target_data_type == :int
 
     raw_max = data['max']
-    if @target_data_type == :int
-      @max = raw_max.to_i
-    else
-      @max = raw_max.to_f
-    end
+    @max = raw_max.to_f
+    @max = raw_max.to_i if @target_data_type == :int
+
+    @bool_choice = BOOL_CHOICES[ data['bool_choice'] ]
   end
 
   def save()
+
     values_hash = {
       seed_id: @seed_id,
       target_column: @target_column,
       source_file: @source_file,
       min: @min,
-      max: @max
+      max: @max,
+      bool_choice: @bool_choice
     }
     id = SqlInterface.insert( DB_NAME, TABLE_NAME, values_hash )
     @id = id
@@ -60,6 +66,14 @@ class SeedSetting
 
     when :string
       string = "~/data/#{@source_file}"
+
+    when :bool
+      if @bool_choice.nil?
+        string = 'random'
+      else
+        string = @bool_choice.to_s
+      end
+
     end
 
     return string

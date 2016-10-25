@@ -16,5 +16,6 @@ CREATE TABLE seed_settings (
   target_column VARCHAR(100),
   source_file VARCHAR(255),
   min DECIMAL(25, 10),
-  max DECIMAL(25, 10)
+  max DECIMAL(25, 10),
+  bool_choice BOOL
 );
