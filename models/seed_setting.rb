@@ -54,9 +54,9 @@ class SeedSetting
 
   def to_s()
     if @source_file.nil?
-      string = "number: #{@min} to #{@max}"
+      string = "#{@min} to #{@max}"
     else
-      string = "file: #{@source_file}"
+      string = "~/data/#{@source_file}"
     end
 
     return string
