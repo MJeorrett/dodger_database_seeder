@@ -9,7 +9,7 @@ get '/databases' do
   names_data.map! do |name_data|
     key = name_data.keys.first
     db_name = name_data[key]
-    href = "/databases/#{db_name}"
+    href = "/databases/#{db_name}/tables"
     {
       key => HtmlElement.new( 'a', db_name, { href: href } )
     }
@@ -32,16 +32,7 @@ end
 
 # SHOW
 get '/databases/:dbname' do
-  @db_name = params[:dbname]
-  @table_data = Database.tables_for_database( @db_name )
-
-  @table_data.map do |table_data_row|
-    href = "/databases/#{@db_name}/#{table_data_row['table_name']}/seeds"
-    seeds_link = HtmlElement.new( 'a', 'seeds', { href: href })
-    table_data_row['seeds_link'] = seeds_link
-  end
-
-  erb(:'databases/show')
+  "Error 600: Matthew laziness error<br /><br />POST '/databases/:dbname' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
 end
 
 # EDIT
