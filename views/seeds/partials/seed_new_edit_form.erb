@@ -20,7 +20,7 @@
 
         <tr>
 
-          <td class="seed-setting-column"><%= column_name %> :</td>
+          <td class="seed-setting-column"><%= "#{column_name} (#{column_data_type})" %> :</td>
 
           <!-- SOURCE FILE -->
           <% if column_data_type == :string %>

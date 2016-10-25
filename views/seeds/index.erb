@@ -17,7 +17,7 @@
   }
 
   seed.settings.each do |setting|
-    column = setting.target_column
+    column = "#{setting.target_column}<br>(#{setting.target_data_type})"
     row_data[column] = setting.to_s
   end
 
