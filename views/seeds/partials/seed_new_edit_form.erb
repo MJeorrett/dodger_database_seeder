@@ -15,12 +15,14 @@
     <tbody>
       <% @target_columns_data.each do |target_column_data| %>
 
-        <% column_name = target_column_data['column_name']
+        <% column_name = target_column_data['column_name'] %>
+        <% column_data_type = target_column_data['data_type'] %>
 
-           column_data_type = target_column_data['data_type'] %>
         <tr>
+
           <td class="seed-setting-column"><%= column_name %> :</td>
 
+          <!-- SOURCE FILE -->
           <% if column_data_type == :string %>
             <td>
               <select name="source_file_<%= column_name %>" >
@@ -33,6 +35,7 @@
             <td></td>
           <% end %>
 
+          <!-- MIN AND MAX -->
           <%
           if column_data_type == :int
             step_attribute = "step='1'"
@@ -42,17 +45,39 @@
           %>
 
           <% if column_data_type == :int || column_data_type == :float %>
+
             <td>
               <input type="number" name="min_<%= column_name %>" min="0" <%= step_attribute %> required>
             </td>
             <td>
               <input type="number" name="max_<%= column_name %>" min="0" <%= step_attribute %> required>
             </td>
+
           <% else %>
+
             <td></td>
             <td></td>
+
+          <% end %>
+
+          <!-- BOOLEAN -->
+          <% if column_data_type == :bool %>
+
+            <td>
+              <select name="bool_<%= column_name %>">
+                <option value="random">Random</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+              </select>
+            </td>
+
+          <% else %>
+
+            <td></td>
+
           <% end %>
         </tr>
+
       <% end %>
     </tbody>
   </table>
