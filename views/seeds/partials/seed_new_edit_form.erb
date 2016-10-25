@@ -16,29 +16,21 @@
         <% target_column = target_column_data['column_name'] %>
         <tr>
           <td class="seed-setting-column"><%= target_column %> :</td>
-          <%
-          if target_column_data['data_type'] == 'character varying'
-            source_file_disabled = ""
-          else
-            source_file_disabled = "disabled"
-          end
-          %>
-          <td>
-            <select name="source_file_<%= target_column %>" <%= source_file_disabled %>>
-              <% @file_names.each do |file_name| %>
-                <option value="<%= file_name %>"><%= file_name %></option>
-              <% end %>
-            </select>
-          </td>
+
+          <% if target_column_data['data_type'] == 'character varying' %>
+            <td>
+              <select name="source_file_<%= target_column %>" >
+                <% @file_names.each do |file_name| %>
+                  <option value="<%= file_name %>"><%= file_name %></option>
+                <% end %>
+              </select>
+            </td>
+          <% else %>
+            <td></td>
+          <% end %>
 
           <%
           data_type = target_column_data['data_type']
-
-          if ['integer', 'smallint', 'numeric'].include?( data_type )
-            number_attributes = "required"
-          else
-            number_attributes = "disabled"
-          end
 
           if ['integer', 'smallint'].include?( data_type )
             step_att = "step='1'"
@@ -47,13 +39,17 @@
           end
           %>
 
-          <td>
-            <input type="number" name="min_<%= target_column %>" min="0" <%= step_att %> <%= number_attributes %>>
-          </td>
-
-          <td>
-            <input type="number" name="max_<%= target_column %>" min="0" <%= step_att %> <%= number_attributes %>>
-          </td>
+          <% if ['integer', 'smallint', 'numeric'].include?( data_type ) %>
+            <td>
+              <input type="number" name="min_<%= target_column %>" min="0" <%= step_att %> required>
+            </td>
+            <td>
+              <input type="number" name="max_<%= target_column %>" min="0" <%= step_att %> required>
+            </td>
+          <% else %>
+            <td></td>
+            <td></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
