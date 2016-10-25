@@ -145,3 +145,42 @@ td {
 .header-row:hover {
   background-color: dodgerblue;
 }
+
+/* HOME PAGE */
+
+.home-div {
+  background-color: dodgerblue;
+  flex-direction: column;
+  height: 600px;
+  text-align: center;
+}
+
+.home-p {
+  color: white;
+  display: inline-block;
+  text-align: center;
+  font-size: 70px;
+  margin: 50px auto;
+  text-decoration: underline;
+  width: 100%;
+}
+
+.home-subtitle {
+  font-size: 35px;
+  text-decoration: none;
+  font-style: italic;
+}
+
+.home-button, .home-button:visited {
+  color: white;
+  background-color: dodgerblue;
+  border-color: white;
+  font-size: 55px;
+  margin-top: 100px;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.home-button:hover {
+  background-color: lightblue;
+}
