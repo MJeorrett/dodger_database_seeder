@@ -36,7 +36,7 @@ class Seed
 
       if setting.source_file.nil?
 
-        if setting.min % 1 != 0 || setting.max % 1 != 0
+        if setting.target_data_type == :float
           values = FloatGenerator.new( setting.min, setting.max )
         else
           values = (setting.min..setting.max).to_a
