@@ -1,9 +1,6 @@
-<span class="breadcrumb">
-  <a href="/databases">databases</a> /
-  <a href="/databases/<%= @db_name %>"><%= @db_name %></a> /
-  <%= @table_name %> /
-  <span class="breadcrumb-current">seeds</span>
-</span>
+<% @current_path = :seeds %>
+<% @current_route = :index %>
+<%= erb(:'partials/breadcrumb') %>
 
 <hr>
 
@@ -13,7 +10,7 @@
 
   row_data = {
     id: seed.id,
-    seed_name: "<a href='/databases/#{@db_name}/#{@table_name}/seeds/#{seed.id}'>#{seed.name}</a>"
+    seed_name: "<a href='/databases/#{@db_name}/tables/#{@table_name}/seeds/#{seed.id}'>#{seed.name}</a>"
   }
 
   seed.settings.each do |setting|
@@ -28,4 +25,4 @@ end %>
 
 <hr>
 
-<a class="button" href="/databases/<%= @db_name %>/<%= @table_name %>/seeds/new">NEW SEED</a>
+<a class="button" href="/databases/<%= @db_name %>/tables/<%= @table_name %>/seeds/new">NEW SEED</a>

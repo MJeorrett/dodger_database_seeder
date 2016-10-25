@@ -1,10 +1,6 @@
-<span class="breadcrumb">
-  <a href="/databases">databases</a> /
-  <a href="/databases/<%= @db_name %>"><%= @db_name %></a> /
-  <%= @table_name %> /
-  <a href="/databases/<%= @db_name %>/<%= @table_name %>/seeds">seeds</a> /
-  <span class="breadcrumb-current"><%= @seed.name %></span>
-</span>
+<% @current_path = :seeds %>
+<% @current_route = :show %>
+<%= erb(:'partials/breadcrumb') %>
 
 <hr>
 
@@ -14,7 +10,7 @@
 
 <hr>
 
-<form action='<%= "/databases/#{@db_name}/#{@table_name}/seeds/#{@seed.id}/run" %>' method="post">
+<form action='<%= "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{@seed.id}/run" %>' method="post">
   <label for="number_of_runs">Number of runs:</label>
     <input id="number_of_runs" type="number" min="0" max="100" step="1" name="number_of_runs" required/>
   <input class="button" type="submit" value="GO!" />

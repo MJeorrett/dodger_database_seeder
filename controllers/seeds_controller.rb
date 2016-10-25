@@ -8,7 +8,7 @@ require_relative('../models/data_file')
 enable(:sessions)
 
 # INDEX
-get '/databases/:dbname/:table_name/seeds' do
+get '/databases/:dbname/tables/:table_name/seeds' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
   @seeds = Seed.all_for_table_in_database( params[:table_name], params[:dbname] )
@@ -17,11 +17,11 @@ get '/databases/:dbname/:table_name/seeds' do
 end
 
 # NEW
-get '/databases/:dbname/:table_name/seeds/new' do
+get '/databases/:dbname/tables/:table_name/seeds/new' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
-
   @target_columns_data = Database.columns_for_table( @db_name, @table_name )
+
   @target_columns_data.reject! do |column_data|
     column_data['column_name'] == 'id'
   end
@@ -34,16 +34,15 @@ get '/databases/:dbname/:table_name/seeds/new' do
 end
 
 # CREATE
-post '/databases/:dbname/:table_name/seeds' do
-
-  db_name = params[:dbname]
-  table_name = params[:table_name]
-  Seed.save( params, db_name, table_name, session[:target_columns_data] )
-  redirect to( "/databases/#{db_name}/#{table_name}/seeds")
+post '/databases/:dbname/tables/:table_name/seeds' do
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
+  Seed.save( params, @db_name, @table_name, session[:target_columns_data] )
+  redirect to( "/databases/#{@db_name}/tables/#{@table_name}/seeds")
 end
 
 # SHOW
-get '/databases/:dbname/:table_name/seeds/:id' do
+get '/databases/:dbname/tables/:table_name/seeds/:id' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
   @seed = Seed.find_by_id( params[:id] )
@@ -52,23 +51,31 @@ get '/databases/:dbname/:table_name/seeds/:id' do
 end
 
 # RUN
-post '/databases/:dbname/:table_name/seeds/:id/run' do
+post '/databases/:dbname/tables/:table_name/seeds/:id/run' do
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
   seed = Seed.find_by_id( params[:id] )
   seed.run( params[:number_of_runs].to_i )
-  redirect to("/databases/#{params[:dbname]}/#{params[:table_name]}/seeds")
+  redirect to("/databases/#{params[:dbname]}/tables/#{params[:table_name]}/seeds")
 end
 
 # EDIT
-get '/databases/:dbname/:table_name/seeds/:id/edit' do
-  "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname/:table_name/seeds/:id/edit' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+get '/databases/:dbname/tables/:table_name/seeds/:id/edit' do
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
+  "Error 600: Matthew laziness error<br /><br />GET '/databases/:dbname/tables/:table_name/seeds/:id/edit' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
 end
 
 # UPDATE
-put '/databases/:dbname/:table_name/seeds/:id' do
-  "Error 600: Matthew laziness error<br /><br />PUT '/databases/:dbname/:table_name/seeds/:id' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+put '/databases/:dbname/tables/:table_name/seeds/:id' do
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
+  "Error 600: Matthew laziness error<br /><br />PUT '/databases/:dbname/tables/:table_name/seeds/:id' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
 end
 
 # DESTROY
-delete '/databases/:dbname/:table_name/seeds/:id' do
-  "Error 600: Matthew laziness error<br /><br />DELETE '/databases/:dbname/:table_name/seeds/:id' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+delete '/databases/:dbname/tables/:table_name/seeds/:id' do
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
+  "Error 600: Matthew laziness error<br /><br />DELETE '/databases/:dbname/tables/:table_name/seeds/:id' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
 end

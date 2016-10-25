@@ -7,12 +7,12 @@ get '/databases/:dbname/tables' do
   @table_data = Database.tables_for_database( @db_name )
 
   @table_data.map do |table_data_row|
-    href = "/databases/#{@db_name}/#{table_data_row['table_name']}/seeds"
+    href = "/databases/#{@db_name}/tables/#{table_data_row['table_name']}/seeds"
     seeds_link = HtmlElement.new( 'a', 'seeds', { href: href })
     table_data_row['seeds_link'] = seeds_link
   end
 
-  erb(:'databases/show')
+  erb(:'tables/index')
 end
 
 # NEW

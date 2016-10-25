@@ -1,0 +1,72 @@
+<%= "current_path: #{@current_path}" %>
+<br />
+<%= "current_route: #{@current_route}" %>
+<br />
+
+<%
+path_indices = {
+  databases: 1,
+  tables: 2,
+  seeds: 3
+}
+
+current_path_index = path_indices[@current_path]
+
+if [:new, :edit, :show].include?(@current_route)
+  link_to_index = true
+else
+  link_to_index = false
+end
+%>
+
+<!-- DATABASES -->
+<% href = "/databases" %>
+<% if @current_path == :databases %>
+  <span class='breadcrumb-current'>databases</span>
+<% else %>
+  <span class="breadcrumb"><a href="<%= href %>">databases</a> / </span>
+<% end %>
+
+<!-- DATABASE NAME -->
+<% href += "/#{@db_name}" %>
+<% if current_path_index > 1 %>
+  <span class="breadcrumb"><%= @db_name %> / </span>
+<% end %>
+
+<!-- TABLES -->
+<% href += "/tables" %>
+<% if @current_path == :tables && !link_to_index %>
+  <span class="breadcrumb-current">tables</span>
+<% elsif current_path_index > 1 %>
+  <span class="breadcrumb"><a href="<%= href %>">tables</a> / </span>
+<% end %>
+
+<!-- TABLE NAME -->
+<% href += "/#{@table_name}" %>
+<% if current_path_index > 2 %>
+  <span class="breadcrumb"><%= @table_name %> / </span>
+<% end %>
+
+<!-- SEEDS -->
+<% href += "/seeds" %>
+<% if @current_path == :seeds && !link_to_index %>
+  <span class="breadcrumb-current">seeds</span>
+<% elsif current_path_index > 2 %>
+  <span class="breadcrumb"><a href="<%= href %>">seeds</a> / </span>
+<% end %>
+
+<!-- SEEDS ROUTES -->
+<% last_link = nil %>
+<%
+case @current_route
+when :new
+  last_link = "new"
+
+when :show, :update
+  last_link = @seed.name
+
+end
+%>
+<% if last_link != nil %>
+  <span class="breadcrumb-current"><%= last_link %></span>
+<% end %>
