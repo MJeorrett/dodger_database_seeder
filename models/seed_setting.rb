@@ -7,7 +7,7 @@ class SeedSetting
   DB_NAME = 'dodas'
   TABLE_NAME = 'seed_settings'
 
-  attr_reader :id, :seed_id, :target_column, :source_file, :min, :max
+  attr_reader :id, :seed_id, :target_column, :target_data_type, :source_file, :min, :max
 
   def initialize( data )
 
@@ -19,19 +19,20 @@ class SeedSetting
     seed = self.seed()
     @target_data_type = Database.datatype_for_column( seed.target_database, seed.target_table, @target_column )
 
-    source_file_key = data.keys.find { |key| key.start_with?('source_file_') }
-    @source_file = data[source_file_key] || data['source_file']
+    @source_file = data['source_file']
 
-    min_key = data.keys.find { |key| key.start_with?('min_')}
-    @min = ( data[min_key] || data['min'] ).to_f
-    if @min % 1 == 0
-      @min = @min.to_i
+    raw_min = data['min']
+    if @target_data_type == :int
+      @min = raw_min.to_i
+    else
+      @min = raw_min.to_f
     end
 
-    max_key = data.keys.find { |key| key.start_with?('max_')}
-    @max = ( data[max_key] || data['max'] ).to_f
-    if @max % 1 == 0
-      @max = @max.to_i
+    raw_max = data['max']
+    if @target_data_type == :int
+      @max = raw_max.to_i
+    else
+      @max = raw_max.to_f
     end
   end
 
