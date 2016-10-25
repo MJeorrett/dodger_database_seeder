@@ -2,6 +2,15 @@ require_relative('../db/sql_runner')
 
 class Database
 
+  SQL_TO_SIMPLE_TYPES = {
+    'integer' => :int,
+    'bigint' => :int,
+    'smallint' => :int,
+    'numeric' => :float,
+    'character varying' => :string,
+    'boolean' => :bool
+  }
+
   def self.tables_for_database( db_name )
     sql =
     "SELECT table_name FROM information_schema.tables
@@ -36,6 +45,11 @@ class Database
     results = SqlRunner.run( 'user', sql, true )
 
     return results
+  end
+
+  def self.sql_to_simple_type( sql_type_string )
+    simple_type = SQL_TO_SIMPLE_TYPES[sql_type_string]
+    return simple_type
   end
 
 end

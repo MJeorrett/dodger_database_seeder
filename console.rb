@@ -1,5 +1,4 @@
 require('pry-byebug')
-require('models/seed_setting')
+require_relative('./models/database')
 
-binding.pry
-nil
+pp Database.columns_for_table( 'dodas_test', 'types' )
