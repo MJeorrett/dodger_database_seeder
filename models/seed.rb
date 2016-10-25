@@ -39,7 +39,7 @@ class Seed
     seed_values = {}
 
     settings().each do |setting|
-      values = Seed.values_for_setting( setting )
+      values = self.values_for_setting( setting )
       seed_values[setting.target_column] = values
     end
 
@@ -55,7 +55,7 @@ class Seed
 
   end
 
-  def self.values_for_setting( seed_setting )
+  def values_for_setting( seed_setting )
 
     case seed_setting.target_data_type
     when :bool
@@ -70,7 +70,14 @@ class Seed
     when :string
       values = DataFile.values_from_file( seed_setting.source_file )
 
+    when :ref
+      values = Database.referenced_values_for_column( @target_database, @target_table, seed_setting.target_column )
+
+      raise "Can't seed #{@target_table} as there are no records in a table which is referenced" if values.nil?
+
     end
+
+    return values
   end
 
   def self.all_for_table_in_database( target_table, target_database )
