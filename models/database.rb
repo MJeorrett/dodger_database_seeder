@@ -46,6 +46,42 @@ class Database
     return column_data['data_type']
   end
 
+  def self.reference_for_column( db_name, table_name, column_name )
+    # query adapted from http://stackoverflow.com/questions/1152260/postgres-sql-to-list-table-foreign-keys
+    sql =
+"SELECT
+  ccu.table_name AS referenced_table,
+  ccu.column_name AS referenced_column
+FROM
+  information_schema.table_constraints AS tc
+  JOIN information_schema.key_column_usage AS kcu
+    ON tc.constraint_name = kcu.constraint_name
+  JOIN information_schema.constraint_column_usage AS ccu
+    ON ccu.constraint_name = tc.constraint_name
+WHERE
+  tc.constraint_type = 'FOREIGN KEY'
+  AND tc.table_name = '#{table_name}'
+  AND kcu.column_name = '#{column_name}'"
+    results = SqlRunner.run( db_name, sql, true )
+    return results.first
+  end
+
+  def self.referenced_values_for_column( db_name, table_name, column_name )
+    ref_data = self.reference_for_column( db_name, table_name, column_name)
+
+    if ref_data.nil?
+      result = []
+    else
+      ref_table = ref_data['referenced_table']
+      ref_column = ref_data['referenced_column']
+    end
+
+    sql = "SELECT DISTINCT #{ref_column} FROM #{ref_table}"
+    sql_result = SqlRunner.run( db_name, sql, true )
+    results = sql_result.map { |result| result.values.first }
+    return results
+  end
+
   def self.all_names()
     sql = "SELECT datname FROM pg_database WHERE datistemplate = false"
     results = SqlRunner.run( 'user', sql, true )
