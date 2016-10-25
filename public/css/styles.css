@@ -134,10 +134,14 @@ th {
   font-size: 18px;
 }
 
-.header-row:hover {
-  background-color: dodgerblue;
-}
-
 td {
   font-family: 'Cutive Mono', monospace;
+}
+
+.inactive-cell {
+  background-color: #CDE;
+}
+
+.header-row:hover {
+  background-color: dodgerblue;
 }
