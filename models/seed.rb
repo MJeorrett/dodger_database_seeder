@@ -9,6 +9,12 @@ class Seed
   DB_NAME = 'dodas'
   TABLE_NAME = 'seeds'
 
+  BOOL_CHOICE_VALUES = {
+    true => [true],
+    false => [false],
+    nil => [true, false]
+  }
+
   attr_reader :id, :name, :target_database, :target_table
 
   def initialize( data )
@@ -33,19 +39,7 @@ class Seed
     seed_values = {}
 
     settings().each do |setting|
-
-      if setting.source_file.nil?
-
-        if setting.target_data_type == :float
-          values = FloatGenerator.new( setting.min, setting.max )
-        else
-          values = (setting.min..setting.max).to_a
-        end
-
-      else
-        values = DataFile.values_from_file( setting.source_file )
-      end
-
+      values = Seed.values_for_setting( setting )
       seed_values[setting.target_column] = values
     end
 
@@ -59,6 +53,24 @@ class Seed
       SqlInterface.insert( @target_database, @target_table, values_hash )
     end
 
+  end
+
+  def self.values_for_setting( seed_setting )
+
+    case seed_setting.target_data_type
+    when :bool
+      values = BOOL_CHOICE_VALUES[ seed_setting.bool_choice ]
+
+    when :int
+      values = (seed_setting.min..seed_setting.max).to_a
+
+    when :float
+      values = FloatGenerator.new( seed_setting.min, seed_setting.max )
+
+    when :string
+      values = DataFile.values_from_file( seed_setting.source_file )
+
+    end
   end
 
   def self.all_for_table_in_database( target_table, target_database )
