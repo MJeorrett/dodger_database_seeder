@@ -27,17 +27,23 @@ class Database
       WHERE table_name = '#{table_name}'"
 
       results = SqlRunner.run( db_name, sql, true )
+      results.map! do |result|
+        simple_type = self.sql_to_simple_type( result['data_type'] )
+        result['data_type'] = simple_type
+        result
+      end
       return results
   end
 
   def self.datatype_for_column( db_name, table_name, column_name )
-    sql =
-    "SELECT data_type
-      FROM information_schema.columns
-      WHERE table_name = '#{table_name}' AND
-        column_name = '#{column_name}'"
-    results = SqlRunner.run( db_name, sql, true )
-    return results.first['data_type']
+
+    columns_data = self.columns_for_table( db_name, table_name )
+
+    column_data = columns_data.find do |a_column_data|
+      a_column_data['column_name'] == column_name
+    end
+
+    return column_data['data_type']
   end
 
   def self.all_names()
