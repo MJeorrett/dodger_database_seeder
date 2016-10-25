@@ -74,6 +74,11 @@ class SeedSetting
         string = @bool_choice.to_s
       end
 
+    when :ref
+      my_seed = self.seed()
+      my_ref_data = Database.reference_for_column( seed.target_database, seed.target_table, @target_column )
+      string = "[#{my_ref_data['referenced_table']}.#{my_ref_data['referenced_column']}]"
+
     end
 
     return string
