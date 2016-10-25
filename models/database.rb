@@ -70,15 +70,16 @@ WHERE
     ref_data = self.reference_for_column( db_name, table_name, column_name)
 
     if ref_data.nil?
-      results = []
+      results = nil
     else
       ref_table = ref_data['referenced_table']
       ref_column = ref_data['referenced_column']
+
+      sql = "SELECT DISTINCT #{ref_column} FROM #{ref_table}"
+      sql_result = SqlRunner.run( db_name, sql, true )
+      results = sql_result.map { |result| result.values.first }
     end
 
-    sql = "SELECT DISTINCT #{ref_column} FROM #{ref_table}"
-    sql_result = SqlRunner.run( db_name, sql, true )
-    results = sql_result.map { |result| result.values.first }
     return results
   end
 
