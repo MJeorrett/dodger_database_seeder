@@ -26,4 +26,8 @@ class DateGeneratorTest < MiniTest::Test
     end
   end
 
+  def test_raises_error_if_min_bigger_than_max()
+    assert_raises { DateGenerator.new( @max_date, @min_date ) }
+  end
+
 end
