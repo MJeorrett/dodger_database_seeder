@@ -1,9 +1,15 @@
 require('sinatra')
 require('sinatra/contrib/all')
 
+require_relative('../db/sql_interface')
+
 # INDEX
 get '/databases/:db_name/tables/:table_name/data' do
-  "Error 600: Matthew laziness error<br /><br />GET '/databases/:db_name/tables/:table_name/data' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+  @db_name = params[:db_name]
+  @table_name = params[:table_name]
+  @table_data = SqlInterface.all_records( @db_name, @table_name )
+
+  erb(:'data/index')
 end
 
 # NEW
