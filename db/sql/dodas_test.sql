@@ -9,8 +9,9 @@ CREATE TABLE test_table (
   first_name VARCHAR(100),
   last_name VARCHAR(100),
   age INT2,
-  height DECIMAL(10, 2),
-  happy BOOLEAN
+  height_in_feet DECIMAL(10, 2),
+  happy BOOLEAN,
+  mums_birthday DATE
 );
 
 CREATE TABLE types (

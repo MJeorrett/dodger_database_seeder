@@ -1,0 +1,14 @@
+<% @current_path = :data%>
+<% @current_route = :index %>
+<%= erb(:'partials/breadcrumb') %>
+
+<hr>
+
+<% form_action = "/databases/#{@db_name}/tables/#{@table_name}/data" %>
+<form action="<%= form_action %>" method="post">
+
+  <%= erb(:'partials/table') %>
+
+</form>
+
+<hr>
