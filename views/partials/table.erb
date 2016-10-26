@@ -6,7 +6,10 @@
       <tr class="header-row">
         <% column_names = [] %>
         <% @table_data.first.keys.each do |column_name| %>
-          <th><%= column_name %></th>
+          <% header_data = @table_headers[column_name] if @header_data != nil%>
+          <% column_title = column_name %>
+          <% column_title = header_data if header_data != nil %>
+          <th><%= column_title %></th>
           <% column_names.push( column_name ) %>
         <% end %>
       </tr>

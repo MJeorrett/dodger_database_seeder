@@ -18,6 +18,12 @@ get '/databases/:dbname/tables' do
     table_data_row['data_link'] = data_link
   end
 
+  @table_headers = {
+    'table_name' => "Table Name",
+    'seeds_link' => "",
+    'data_link' => ""
+  }
+
   erb(:'tables/index')
 end
 
