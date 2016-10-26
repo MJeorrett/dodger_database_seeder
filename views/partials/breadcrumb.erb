@@ -43,12 +43,26 @@ end
   <span class="breadcrumb"><%= @table_name %> / </span>
 <% end %>
 
+<% if @current_path == :seeds %>
+
 <!-- SEEDS -->
 <% href += "/seeds" %>
 <% if @current_path == :seeds && !link_to_index %>
   <span class="breadcrumb-current">seeds</span>
 <% elsif current_path_index > 2 %>
   <span class="breadcrumb"><a href="<%= href %>">seeds</a> / </span>
+<% end %>
+
+<% elsif @current_path == :data %>
+
+<!-- DATA -->
+<% href += "/data" %>
+<% if @current_path == :data && !link_to_index %>
+  <span class="breadcrumb-current">data</span>
+<% elsif current_path_index > 2 %>
+  <span class="breadcrumb"><a href="<%= href %>">data</a> / </span>
+<% end %>
+
 <% end %>
 
 <!-- SEEDS ROUTES -->
@@ -59,7 +73,9 @@ when :new
   last_link = "new"
 
 when :show, :update
-  last_link = @seed.name
+  if @current_path = :seeds
+    last_link = @seed.name
+  end
 
 end
 %>
