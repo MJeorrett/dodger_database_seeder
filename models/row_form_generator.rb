@@ -18,6 +18,7 @@ class RowFormGenerator
           required: :boolean,
           min: "0",
           step: "1",
+          class: 'new-form-input'
         }
         input = HtmlElement.new( 'input', "", atts )
 
@@ -28,6 +29,7 @@ class RowFormGenerator
           required: :boolean,
           min: "0",
           step: "any",
+          class: 'new-form-input'
         }
         input = HtmlElement.new( 'input', "", atts )
 
@@ -35,31 +37,33 @@ class RowFormGenerator
         atts = {
           type: "text",
           name: column_name,
-          required: :boolean
+          required: :boolean,
+          class: 'new-form-input'
         }
         input = HtmlElement.new( 'input', "", atts )
 
       when :bool
         true_option = HtmlElement.new( 'option', "true", { value: "t" } )
         false_option = HtmlElement.new( 'option', "false", { value: "f" } )
-        input = HtmlElement.new( 'select', [true_option, false_option], { name: column_name } )
+        input = HtmlElement.new( 'select', [true_option, false_option], { name: column_name, class: 'new-form-input' } )
 
       when :date
         atts = {
           type: "date",
           name: column_name,
-          required: :boolean
+          required: :boolean,
+          class: 'new-form-input'
         }
         input = HtmlElement.new( 'input', "", atts )
 
       when :ref
         values = Database.referenced_values_for_column( db_name, table_name, column_name )
-        
+
         options = values.map do |value|
           HtmlElement.new( 'option', value, { value: value } )
         end
 
-        input = HtmlElement.new( 'select', options, { name: column_name } )
+        input = HtmlElement.new( 'select', options, { name: column_name, class: 'new-form-input' } )
 
       end
 
@@ -70,7 +74,8 @@ class RowFormGenerator
     inputs['id'] = ""
     submit_atts = {
       type: 'submit',
-      value: "Create"
+      value: "Create",
+      id: 'new-form-create'
     }
     inputs['submit'] = HtmlElement.new( 'input', "", submit_atts )
 
