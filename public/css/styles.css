@@ -52,7 +52,10 @@ a {
 
 .button {
   cursor: pointer;
-  padding: 5px;
+  padding: 10px;
+  font-size: 25px;
+  font-family: monospace;
+  box-sizing: border-box;
 }
 
 .no-data {
@@ -187,4 +190,9 @@ td {
 
 .highlight {
   background-color: lightgreen;
+}
+
+.button-delete:hover {
+  background-color: lightpink;
+  color: red;
 }

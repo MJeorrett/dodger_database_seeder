@@ -33,3 +33,6 @@ end
 <hr>
 
 <a class="button" href="/databases/<%= @db_name %>/tables/<%= @table_name %>/seeds/new">NEW SEED</a>
+
+<% data_href = "/databases/#{@db_name}/tables/#{@table_name}/data" %>
+<a class="button" href="<%= data_href %>">View Data</a>

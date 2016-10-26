@@ -10,7 +10,10 @@
 
 <% form_action = "/databases/#{@db_name}/tables/#{@table_name}/data" %>
 
-<form action="<%= form_action %>" method="post">
-  <input class="button" type="submit" value="Delete All Data" />
+<form style="display: inline-block" action="<%= form_action %>" method="post">
+  <input class="button button-delete" type="submit" value="Delete All Data" />
   <input type="hidden" name="_method" value="delete" />
 </form>
+
+<% seeds_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds" %>
+<a class="button" href="<%= seeds_href %>">View Seeds</a>
