@@ -43,3 +43,8 @@ end
 delete '/databases/:db_name/tables/:table_name/data/:row_id' do
   "Error 600: Matthew laziness error<br /><br />DELETE '/databases/:db_name/tables/:table_name/data/:row_id' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
 end
+
+# DESTROY ALL
+delete '/databases/:db_name/tables/:table_name/data' do
+  "Error 600: Matthew laziness error<br /><br />DELETE '/databases/:db_name/tables/:table_name/data' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+end
