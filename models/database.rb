@@ -45,6 +45,10 @@ class Database
       return results
   end
 
+  def self.delete_all_from_table( db_name, table_name )
+    result = SqlInterface.delete_all( db_name, table_name )
+  end
+
   def self.datatype_for_column( db_name, table_name, column_name )
 
     columns_data = self.columns_for_table( db_name, table_name )
