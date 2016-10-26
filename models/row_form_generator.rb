@@ -52,6 +52,15 @@ class RowFormGenerator
         }
         input = HtmlElement.new( 'input', "", atts )
 
+      when :ref
+        values = Database.referenced_values_for_column( db_name, table_name, column_name )
+        
+        options = values.map do |value|
+          HtmlElement.new( 'option', value, { value: value } )
+        end
+
+        input = HtmlElement.new( 'select', options, { name: column_name } )
+
       end
 
       inputs[column_name] = input
