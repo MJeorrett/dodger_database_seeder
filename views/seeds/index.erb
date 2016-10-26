@@ -26,7 +26,6 @@
 
   @table_data.push( row_data )
 end
-  @table_headers = @table_data.first.to_titles() if !@table_data.empty?
 %>
 
 <%= erb(:'partials/table') %>
