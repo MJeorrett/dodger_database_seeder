@@ -62,6 +62,10 @@ class SeedSetting
     @id = id
   end
 
+  def delete()
+    SqlInterface.delete_with_id( DB_NAME, TABLE_NAME, @id )
+  end
+
   def seed()
     Seed.find_by_id( @seed_id )
   end

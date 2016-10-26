@@ -84,7 +84,10 @@ end
 
 # DESTROY
 delete '/databases/:dbname/tables/:table_name/seeds/:id' do
-  @db_name = params[:dbname]
-  @table_name = params[:table_name]
-  "Error 600: Matthew laziness error<br /><br />DELETE '/databases/:dbname/tables/:table_name/seeds/:id' not implemented yet ... :-(<br /><br /><hr><br />params passed: #{params}"
+  seed = Seed.find_by_id( params[:id] )
+  seed.delete()
+
+  db_name = params[:dbname]
+  table_name = params[:table_name]
+  redirect to("/databases/#{db_name}/tables/#{table_name}/seeds")
 end

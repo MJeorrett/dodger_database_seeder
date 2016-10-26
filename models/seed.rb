@@ -120,6 +120,12 @@ class Seed
     end
   end
 
+  def delete()
+    settings = self.settings()
+    settings.each { |setting| setting.delete }
+    SqlInterface.delete_with_id( DB_NAME, TABLE_NAME, @id )
+  end
+
   def self.find_by_id( id )
     seed_data = SqlInterface.find_by_id( DB_NAME, TABLE_NAME, id )
     seed = ModelBuilder.model_from_data( Seed, seed_data )
