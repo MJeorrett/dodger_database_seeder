@@ -55,7 +55,8 @@ a {
   padding: 10px;
   font-size: 25px;
   font-family: monospace;
-  box-sizing: border-box;
+  box-sizing: content-box;
+  height: 25px;
 }
 
 .no-data {
