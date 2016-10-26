@@ -8,8 +8,6 @@
 @table_data = []
 @seeds.each do |seed|
 
-  run_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{seed.id}"
-
   row_data = {
     id: seed.id,
     seed_name: seed.name
@@ -20,7 +18,8 @@
     row_data[column] = setting.to_s
   end
 
-  row_data[:run_seed] = HtmlElement.new( 'a', "run", { href: run_href } )
+  run_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{seed.id}"
+  row_data[:run_seed] = HtmlElement.new( 'a', "run", { href: run_href } ))
 
   @table_data.push( row_data )
 end
