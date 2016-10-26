@@ -8,7 +8,7 @@ get '/databases/:dbname/tables/:table_name/data' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
   @table_data = SqlInterface.all_records( @db_name, @table_name )
-  if @table_data.first['id'] != nil
+  if !@table_data.empty? && @table_data.first['id'] != nil
     @table_data.map! do |row|
       form_action = "/databases/#{@db_name}/tables/#{@table_name}/data/#{row['id']}"
       form_atts = {
