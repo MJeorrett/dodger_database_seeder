@@ -14,6 +14,9 @@
 <% seeds_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds" %>
 <a class="button" href="<%= seeds_href %>">View Seeds</a>
 
+<% new_href = "/databases/#{@db_name}/tables/#{@table_name}/data/new" %>
+<a class="button" href="<%= new_href %>">New Row</a>
+
 <hr>
 
 <%= erb(:'partials/table') %>
@@ -29,3 +32,6 @@
 
 <% seeds_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds" %>
 <a class="button" href="<%= seeds_href %>">View Seeds</a>
+
+<% new_href = "/databases/#{@db_name}/tables/#{@table_name}/data/new" %>
+<a class="button" href="<%= new_href %>">New Row</a>
