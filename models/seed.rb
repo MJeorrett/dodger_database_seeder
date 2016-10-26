@@ -3,6 +3,7 @@ require_relative('./model_builder')
 require_relative('./html_element')
 require_relative('./seed_setting')
 require_relative('./float_generator')
+require_relative('./date_generator')
 
 class Seed
 
@@ -60,6 +61,9 @@ class Seed
     case seed_setting.target_data_type
     when :bool
       values = BOOL_CHOICE_VALUES[ seed_setting.bool_choice ]
+
+    when :date
+      values = DateGenerator.new( seed_setting.min_date, seed_setting.max_date )
 
     when :int
       values = (seed_setting.min..seed_setting.max).to_a
