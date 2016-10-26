@@ -197,3 +197,14 @@ td {
   background-color: lightpink;
   color: red;
 }
+
+.table-delete {
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.table-delete:hover {
+  background-color: lightpink;
+  color: red;
+}

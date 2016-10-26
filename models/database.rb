@@ -45,8 +45,14 @@ class Database
       return results
   end
 
+  def self.delete_with_id( db_name, table_name, id )
+    result = SqlInterface.delete_with_id( db_name, table_name, id )
+    return result
+  end
+
   def self.delete_all_from_table( db_name, table_name )
     result = SqlInterface.delete_all( db_name, table_name )
+    return result
   end
 
   def self.datatype_for_column( db_name, table_name, column_name )
