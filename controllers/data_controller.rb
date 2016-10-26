@@ -8,6 +8,8 @@ get '/databases/:db_name/tables/:table_name/data' do
   @db_name = params[:db_name]
   @table_name = params[:table_name]
   @table_data = SqlInterface.all_records( @db_name, @table_name )
+  highlight_param = params[:highlight]
+  @table_highlight_rows = highlight_param.split(',') if highlight_param != nil
 
   erb(:'data/index')
 end

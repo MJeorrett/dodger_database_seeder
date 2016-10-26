@@ -64,8 +64,9 @@ post '/databases/:dbname/tables/:table_name/seeds/:id/run' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]
   seed = Seed.find_by_id( params[:id] )
-  seed.run( params[:number_of_runs].to_i )
-  redirect to("/databases/#{params[:dbname]}/tables/#{params[:table_name]}/data")
+  new_ids = seed.run( params[:number_of_runs].to_i )
+  highlight_param = "highlight=#{new_ids.join(',')}"
+  redirect to("/databases/#{params[:dbname]}/tables/#{params[:table_name]}/data?#{highlight_param}")
 end
 
 # EDIT

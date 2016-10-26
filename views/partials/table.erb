@@ -17,7 +17,9 @@
     </thead>
     <tbody>
       <% @table_data.each do |data_row| %>
-        <tr>
+        <% tr_class = "" %>
+        <% tr_class = "highlight" if @table_highlight_rows != nil && @table_highlight_rows.include?( data_row['id'] ) %>
+        <tr class="<%= tr_class %>">
           <% column_names.each do |column_name| %>
             <td><%= data_row[column_name] %></td>
           <% end %>

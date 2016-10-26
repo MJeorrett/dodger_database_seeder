@@ -44,6 +44,8 @@ class Seed
       seed_values[setting.target_column] = values
     end
 
+    new_ids = []
+
     count.times do
       values_hash = {}
 
@@ -51,9 +53,11 @@ class Seed
         values_hash[column_name] = values.sample
       end
 
-      SqlInterface.insert( @target_database, @target_table, values_hash )
+      new_id = SqlInterface.insert( @target_database, @target_table, values_hash )
+      new_ids.push( new_id )
     end
 
+    return new_ids
   end
 
   def values_for_setting( seed_setting )

@@ -184,3 +184,7 @@ td {
 .home-button:hover {
   background-color: lightblue;
 }
+
+.highlight {
+  background-color: lightgreen;
+}
