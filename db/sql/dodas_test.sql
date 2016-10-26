@@ -1,4 +1,4 @@
--- psql -d dodas_test -f db/sql/dodas_test.sql
+  -- psql -d dodas_test -f db/sql/dodas_test.sql
 
 DROP TABLE IF EXISTS test_table;
 DROP TABLE IF EXISTS types;
@@ -29,5 +29,6 @@ CREATE TABLE types (
   decimal_ DECIMAL,
   varchar_100 VARCHAR(100),
   varchar_255 VARCHAR(255),
-  boolean_ BOOLEAN
+  boolean_ BOOLEAN,
+  date_ DATE
 );

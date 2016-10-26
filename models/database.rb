@@ -8,7 +8,8 @@ class Database
     'smallint' => :int,
     'numeric' => :float,
     'character varying' => :string,
-    'boolean' => :bool
+    'boolean' => :bool,
+    'date' => :date
   }
 
   def self.tables_for_database( db_name )
