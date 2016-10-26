@@ -1,0 +1,3 @@
+<% @seed.settings.each do |setting| %>
+  <p class="seed-setting"><span class="seed-setting-column"><%= "#{setting.target_column} (#{setting.target_data_type})" %></span> : <%= setting.to_s %>
+<% end %>

@@ -1,17 +1,16 @@
 <% @current_path = :seeds %>
 <% @current_route = :show %>
+
 <%= erb(:'partials/breadcrumb') %>
 
 <hr>
 
-<% @seed.settings.each do |setting| %>
-  <p class="seed-setting"><span class="seed-setting-column"><%= "#{setting.target_column} (#{setting.target_data_type})" %></span> : <%= setting.to_s %>
-<% end %>
+<%= erb(:'seeds/partials/seed_details') %>
 
 <hr>
 
-<form action='<%= "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{@seed.id}/run" %>' method="post">
-  <label for="number_of_runs">Number of runs:</label>
-    <input id="number_of_runs" type="number" min="0" max="100" step="1" name="number_of_runs" required/>
-  <input class="button" type="submit" value="GO!" />
+<% form_action = "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{@seed.id}" %>
+<form action="<%= form_action %>" method="post">
+  <input class="button" type="submit" value="Delete Seed" />
+  <input type="hidden" name="_method" value="delete" />
 </form>

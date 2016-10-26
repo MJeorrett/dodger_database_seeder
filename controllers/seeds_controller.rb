@@ -51,6 +51,15 @@ get '/databases/:dbname/tables/:table_name/seeds/:id' do
 end
 
 # RUN
+get '/databases/:dbname/tables/:table_name/seeds/:id/run' do
+  @db_name = params[:dbname]
+  @table_name = params[:table_name]
+  @seed = Seed.find_by_id( params[:id] )
+
+  erb( :'seeds/run')
+end
+
+# PROCESS RUN
 post '/databases/:dbname/tables/:table_name/seeds/:id/run' do
   @db_name = params[:dbname]
   @table_name = params[:table_name]

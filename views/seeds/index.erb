@@ -18,7 +18,7 @@
     row_data[column] = setting.to_s
   end
 
-  run_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{seed.id}"
+  run_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{seed.id}/run"
   row_data[:run_seed] = HtmlElement.new( 'a', "run", { href: run_href } )
 
   @table_data.push( row_data )
