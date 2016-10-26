@@ -8,9 +8,11 @@
 @table_data = []
 @seeds.each do |seed|
 
+  run_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{seed.id}"
+
   row_data = {
     id: seed.id,
-    seed_name: "<a href='/databases/#{@db_name}/tables/#{@table_name}/seeds/#{seed.id}'>#{seed.name}</a>"
+    seed_name: seed.name
   }
 
   seed.settings.each do |setting|
@@ -18,8 +20,11 @@
     row_data[column] = setting.to_s
   end
 
+  row_data[:run_seed] = HtmlElement.new( 'a', "run", { href: run_href } )
+
   @table_data.push( row_data )
-end %>
+end
+%>
 
 <%= erb(:'partials/table') %>
 
