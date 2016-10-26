@@ -7,8 +7,10 @@
       <tr class="header-row">
         <th>Column Name</th>
         <th>Data File</th>
-        <th>Min</th>
-        <th>Max</th>
+        <th>Num. Min</th>
+        <th>Num. Max</th>
+        <th>Date Min</th>
+        <th>Date Max</th>
         <th>Boolean</th>
         <th>Ref</th>
       </tr>
@@ -21,7 +23,7 @@
 
         <tr>
 
-          <td class="seed-setting-column"><%= "#{column_name} (#{column_data_type})" %> :</td>
+          <td class="seed-setting-column"><%= "#{column_name} :<br/>" %></td>
 
           <!-- SOURCE FILE -->
           <% if column_data_type == :string %>
@@ -36,7 +38,7 @@
             <td class="inactive-cell"></td>
           <% end %>
 
-          <!-- MIN AND MAX -->
+          <!-- NUMBERS -->
           <%
           if column_data_type == :int
             step_attribute = "step='1'"
@@ -51,13 +53,29 @@
               <input type="number" name="min_<%= column_name %>" min="0" <%= step_attribute %> required>
             </td>
             <td>
-              <input type="number" name="max_<%= column_name %>" min="0" <%= step_attribute %> required>
+              <input type="number" name="max_<%= column_name %>" min="0" <%= step_attribute %> required />
             </td>
 
           <% else %>
             <td class="inactive-cell"></td>
             <td class="inactive-cell"></td>
           <% end %>
+
+          <!-- DATES -->
+          <% if column_data_type == :date %>
+
+            <td>
+              <input type="date" name="min_date_<%= column_name %>" required />
+            </td>
+            <td>
+              <input type="date" name="max_date_<%= column_name %>" required />
+            </td>
+
+          <% else %>
+            <td class="inactive-cell"></td>
+            <td class="inactive-cell"></td>
+          <% end %>
+
 
           <!-- BOOLEAN -->
           <% if column_data_type == :bool %>

@@ -15,7 +15,7 @@ class SeedSetting
     'random' => nil
   }
 
-  attr_reader :id, :seed_id, :target_column, :target_data_type, :source_file, :min, :max, :bool_choice
+  attr_reader :id, :seed_id, :target_column, :target_data_type, :source_file, :min, :max, :min_date, :max_date, :bool_choice
 
   def initialize( data )
 
@@ -37,6 +37,12 @@ class SeedSetting
     @max = raw_max.to_f
     @max = raw_max.to_i if @target_data_type == :int
 
+    min_date_data = data['min_date']
+    @min_date = Date.parse(min_date_data) if min_date_data != nil
+
+    max_date_data = data['max_date']
+    @max_date = Date.parse(max_date_data) if max_date_data != nil
+
     @bool_choice = BOOL_CHOICES[ data['bool_choice'] ]
   end
 
@@ -48,6 +54,8 @@ class SeedSetting
       source_file: @source_file,
       min: @min,
       max: @max,
+      min_date: @min_date,
+      max_date: @max_date,
       bool_choice: @bool_choice
     }
     id = SqlInterface.insert( DB_NAME, TABLE_NAME, values_hash )
@@ -63,6 +71,9 @@ class SeedSetting
     case @target_data_type
     when :int, :float
       string = "#{@min} to #{@max}"
+
+    when :date
+      string = "#{@min_date} to #{@max_date}"
 
     when :string
       string = "~/data/#{@source_file}"

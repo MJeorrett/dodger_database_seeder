@@ -85,7 +85,7 @@ class SqlBuilder
 
   def self.value_to_sql( value )
     value_class = value.class().to_s()
-    
+
     case value_class
 
     when 'Fixnum'
@@ -105,6 +105,9 @@ class SqlBuilder
 
     when 'NilClass'
       sql = "NULL"
+
+    when 'Date'
+      sql = "'#{value}'"
 
     else
       raise(TypeError, "Un-supported data type class: #{value_class}.")

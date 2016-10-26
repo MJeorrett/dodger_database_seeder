@@ -17,5 +17,7 @@ CREATE TABLE seed_settings (
   source_file VARCHAR(255),
   min DECIMAL(25, 10),
   max DECIMAL(25, 10),
+  min_date DATE,
+  max_date DATE,
   bool_choice BOOL
 );

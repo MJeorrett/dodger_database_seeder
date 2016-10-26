@@ -2,6 +2,7 @@
 
 DROP TABLE IF EXISTS test_table;
 DROP TABLE IF EXISTS types;
+DROP TABLE IF EXISTS dates_test;
 
 CREATE TABLE test_table (
   id SERIAL4 primary key,
@@ -31,4 +32,10 @@ CREATE TABLE types (
   varchar_255 VARCHAR(255),
   boolean_ BOOLEAN,
   date_ DATE
+);
+
+CREATE TABLE dates_test (
+  id SERIAL4,
+  date_ DATE,
+  name VARCHAR(100)
 );

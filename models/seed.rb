@@ -107,6 +107,8 @@ class Seed
         'source_file' => data['source_file_' + target_column],
         'min' => data['min_' + target_column],
         'max' => data['max_' + target_column],
+        'min_date' => data['min_date_' + target_column],
+        'max_date' => data['max_date_' + target_column],
         'bool_choice' => data['bool_' + target_column]
       }
       seed_setting = SeedSetting.new( setting_data )
