@@ -8,9 +8,12 @@
 @table_data = []
 @seeds.each do |seed|
 
+  seed_name_href = "/databases/#{@db_name}/tables/#{@table_name}/seeds/#{seed.id}"
+  seed_show_link = HtmlElement.new( 'a', seed.name, { href: seed_name_href } )
+
   row_data = {
     id: seed.id,
-    seed_name: seed.name
+    seed_name: seed_show_link
   }
 
   seed.settings.each do |setting|
