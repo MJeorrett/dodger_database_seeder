@@ -233,3 +233,11 @@ td {
 #new-form-create:hover {
   background-color: lightblue;
 }
+
+.home-highlight {
+  color: dodgerblue;
+  background-color: white;
+  border-radius: 8px;
+  padding-right: 4px;
+  text-decoration: none;
+}
