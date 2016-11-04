@@ -5,7 +5,14 @@ class SqlRunner
   def self.run( dname, sql, strip_results=false )
 
     begin
-      db = PG.connect({ dbname: dname, host: 'localhost' })
+
+      if ENV['DATABASE_URL'] == nil
+        db = PG.connect({ dbname: dname, host: 'localhost' })
+      else
+        uri = URI.parse( ENV['DATABASE_URL'] )
+        db = PG.connect( dbname: uri.path[1..-1], host: uri.host, user: uri.user, password: uri.password )
+      end
+      
       result = db.exec( sql )
 
     ensure
